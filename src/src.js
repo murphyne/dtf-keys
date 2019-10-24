@@ -65,7 +65,8 @@
     let firstFeedItem = elements.find(function (v, i, a) {
       return v.classList.contains('feed__item');
     });
-    let feedHeaderHeight = document.querySelector('.feed_header').clientHeight;
+    let feedHeader = document.querySelector('.feed_header');
+    let feedHeaderHeight = feedHeader.getBoundingClientRect().height;
     firstFeedItem.style.marginTop = `-${feedHeaderHeight}px`;
     firstFeedItem.style.paddingTop = `${feedHeaderHeight}px`;
 
