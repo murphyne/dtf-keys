@@ -52,6 +52,9 @@
 
   function selectElements () {
     let selectors = [
+      '.custom_subsite_html:first-of-type',
+      '.subsite__cover:first-of-type',
+      '.subsite_head:first-of-type',
       '.news_widget',
       '.teaserPodcast',
       '.vacancies_widget',
