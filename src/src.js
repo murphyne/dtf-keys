@@ -52,6 +52,7 @@
 
   function selectElements () {
     let selectors = [
+      '.vacancy_header',
       '.custom_subsite_html:first-of-type',
       '.subsite__cover:first-of-type',
       '.subsite_head:first-of-type',
