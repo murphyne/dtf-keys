@@ -62,18 +62,30 @@
       '.feed__item',
     ].join(',');
 
-    let elements = Array.from(document.querySelectorAll(selectors));
+    return Array.from(document.querySelectorAll(selectors));
+  }
 
-    //Do not obscure .feed_header
-    let firstFeedItem = elements.find(function (v, i, a) {
-      return v.classList.contains('feed__item');
-    });
-    let feedHeader = document.querySelector('.feed_header');
-    let feedHeaderHeight = feedHeader.getBoundingClientRect().height;
-    firstFeedItem.style.marginTop = `-${feedHeaderHeight}px`;
-    firstFeedItem.style.paddingTop = `${feedHeaderHeight}px`;
+  function computeOffset (targetElement) {
+    let targetElementTop = targetElement.getBoundingClientRect().top;
+    let topMargin = 15;
+    let targetOffset = targetElementTop - viewTop - topMargin;
 
-    return elements;
+    //Reveal both .feed_header and .new_entries
+    if (targetElement.isSameNode(document.querySelector('.feed__item'))) {
+      let feedHeader = document.querySelector('.feed_header');
+      if (feedHeader) {
+        let feedHeaderHeight = feedHeader.getBoundingClientRect().height;
+        targetOffset = targetOffset - feedHeaderHeight;
+      }
+
+      let newEntries = document.querySelector('.new_entries');
+      if (newEntries) {
+        let newEntriesHeight = newEntries.getBoundingClientRect().height;
+        targetOffset = targetOffset - newEntriesHeight;
+      }
+    }
+
+    return targetOffset;
   }
 
   function indexOfCurrent (elements) {
@@ -116,9 +128,7 @@
         d: elements[i + 1] || elements[i],
       }[key];
 
-      let targetElementTop = targetElement.getBoundingClientRect().top;
-      let topMargin = 15;
-      let targetOffset = targetElementTop - viewTop - topMargin;
+      let targetOffset = computeOffset(targetElement);
 
       window.scrollBy({ left: 0, top: targetOffset, behavior: 'smooth' });
     }
