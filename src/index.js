@@ -1,4 +1,4 @@
-;(function dtfNavigationKeys () {
+export function dtfNavigationKeys () {
   'use strict';
 
   //https://docs.microsoft.com/en-us/previous-versions//hh781509(v=vs.85)
@@ -181,4 +181,4 @@
       break;
     }
   }
-})();
+}

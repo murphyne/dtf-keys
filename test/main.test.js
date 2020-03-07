@@ -1,7 +1,7 @@
 import chai from 'chai';
 import sinon from 'sinon';
 
-describe('src.js', function () {
+describe('main.js', function () {
   beforeEach(function () {
     global.document = {
       addEventListener: sinon.fake(),
@@ -15,7 +15,7 @@ describe('src.js', function () {
   it('Adds EventListener to document', async function () {
     chai.assert.isFalse(document.addEventListener.called);
 
-    await import('../src/src.js');
+    await import('../src/main.js');
 
     chai.assert.isTrue(document.addEventListener.called);
   });
