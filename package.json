@@ -4,6 +4,7 @@
   "description": "Navigate with keys!",
   "author": "mr-m",
   "license": "ISC",
+  "type": "module",
   "browser": "./src/src.js",
   "devDependencies": {
     "chai": "^4.2.0",
@@ -12,6 +13,7 @@
     "sinon": "^8.1.1"
   },
   "scripts": {
-    "build": "rollup -c rollup.conf.js"
+    "build": "rollup -c rollup.conf.js",
+    "test": "mocha"
   }
 }
