@@ -1,54 +1,54 @@
+//https://docs.microsoft.com/en-us/previous-versions//hh781509(v=vs.85)
+//https://learn.javascript.ru/coordinates
+
+function isApproaching (bounds, viewTop, viewBottom) {
+  return bounds.bottom > viewTop;
+}
+
+function isPartInbound (bounds, viewTop, viewBottom) {
+  return (bounds.bottom > viewTop) && (bounds.top < viewBottom);
+}
+
+function isFullInbound (bounds, viewTop, viewBottom) {
+  return (bounds.top > viewTop) && (bounds.bottom < viewBottom);
+}
+
+function getHiddenTop (bounds, viewTop, viewBottom) {
+  return Math.max(viewTop - bounds.top, 0);
+}
+
+function getHiddenBottom (bounds, viewTop, viewBottom) {
+  return Math.max(bounds.bottom - viewBottom, 0);
+}
+
+function getVisible (bounds, viewTop, viewBottom) {
+  let hiddenTop = getHiddenTop(bounds, viewTop, viewBottom);
+  let hiddenBottom = getHiddenBottom(bounds, viewTop, viewBottom);
+  return bounds.height - hiddenTop - hiddenBottom;
+}
+
+function getPartOfBounds (bounds, viewTop, viewBottom) {
+  let visible = getVisible(bounds, viewTop, viewBottom);
+  return visible / bounds.height;
+}
+
+function getPartOfView (bounds, viewTop, viewBottom) {
+  let visible = getVisible(bounds, viewTop, viewBottom);
+  return visible / viewBottom;
+}
+
+function isVisibleEnough (bounds, viewTop, viewBottom) {
+  return (
+    getPartOfBounds(bounds, viewTop, viewBottom) > 0.4 ||
+    getPartOfView(bounds, viewTop, viewBottom) > 0.4
+  );
+}
+
 export function dtfNavigationKeys () {
   'use strict';
 
-  //https://docs.microsoft.com/en-us/previous-versions//hh781509(v=vs.85)
-  //https://learn.javascript.ru/coordinates
-
   let _viewTop;
   let _viewBottom;
-
-  function isApproaching (bounds, viewTop, viewBottom) {
-    return bounds.bottom > viewTop;
-  }
-
-  function isPartInbound (bounds, viewTop, viewBottom) {
-    return (bounds.bottom > viewTop) && (bounds.top < viewBottom);
-  }
-
-  function isFullInbound (bounds, viewTop, viewBottom) {
-    return (bounds.top > viewTop) && (bounds.bottom < viewBottom);
-  }
-
-  function getHiddenTop (bounds, viewTop, viewBottom) {
-    return Math.max(viewTop - bounds.top, 0);
-  }
-
-  function getHiddenBottom (bounds, viewTop, viewBottom) {
-    return Math.max(bounds.bottom - viewBottom, 0);
-  }
-
-  function getVisible (bounds, viewTop, viewBottom) {
-    let hiddenTop = getHiddenTop(bounds, viewTop, viewBottom);
-    let hiddenBottom = getHiddenBottom(bounds, viewTop, viewBottom);
-    return bounds.height - hiddenTop - hiddenBottom;
-  }
-
-  function getPartOfBounds (bounds, viewTop, viewBottom) {
-    let visible = getVisible(bounds, viewTop, viewBottom);
-    return visible / bounds.height;
-  }
-
-  function getPartOfView (bounds, viewTop, viewBottom) {
-    let visible = getVisible(bounds, viewTop, viewBottom);
-    return visible / viewBottom;
-  }
-
-  function isVisibleEnough (bounds, viewTop, viewBottom) {
-    return (
-      getPartOfBounds(bounds, viewTop, viewBottom) > 0.4 ||
-      getPartOfView(bounds, viewTop, viewBottom) > 0.4
-    );
-  }
 
   function selectElements () {
     let selectors = [
