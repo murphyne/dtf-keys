@@ -4,49 +4,49 @@ export function dtfNavigationKeys () {
   //https://docs.microsoft.com/en-us/previous-versions//hh781509(v=vs.85)
   //https://learn.javascript.ru/coordinates
 
-  let viewTop;
-  let viewBottom;
+  let _viewTop;
+  let _viewBottom;
 
-  function isApproaching (bounds) {
+  function isApproaching (bounds, viewTop, viewBottom) {
     return bounds.bottom > viewTop;
   }
 
-  function isPartInbound (bounds) {
+  function isPartInbound (bounds, viewTop, viewBottom) {
     return (bounds.bottom > viewTop) && (bounds.top < viewBottom);
   }
 
-  function isFullInbound (bounds) {
+  function isFullInbound (bounds, viewTop, viewBottom) {
     return (bounds.top > viewTop) && (bounds.bottom < viewBottom);
   }
 
-  function getHiddenTop (bounds) {
+  function getHiddenTop (bounds, viewTop, viewBottom) {
     return Math.max(viewTop - bounds.top, 0);
   }
 
-  function getHiddenBottom (bounds) {
+  function getHiddenBottom (bounds, viewTop, viewBottom) {
     return Math.max(bounds.bottom - viewBottom, 0);
   }
 
-  function getVisible (bounds) {
-    let hiddenTop = getHiddenTop(bounds);
-    let hiddenBottom = getHiddenBottom(bounds);
+  function getVisible (bounds, viewTop, viewBottom) {
+    let hiddenTop = getHiddenTop(bounds, viewTop, viewBottom);
+    let hiddenBottom = getHiddenBottom(bounds, viewTop, viewBottom);
     return bounds.height - hiddenTop - hiddenBottom;
   }
 
-  function getPartOfBounds (bounds) {
-    let visible = getVisible(bounds);
+  function getPartOfBounds (bounds, viewTop, viewBottom) {
+    let visible = getVisible(bounds, viewTop, viewBottom);
     return visible / bounds.height;
   }
 
-  function getPartOfView (bounds) {
-    let visible = getVisible(bounds);
+  function getPartOfView (bounds, viewTop, viewBottom) {
+    let visible = getVisible(bounds, viewTop, viewBottom);
     return visible / viewBottom;
   }
 
-  function isVisibleEnough (bounds) {
+  function isVisibleEnough (bounds, viewTop, viewBottom) {
     return (
-      getPartOfBounds(bounds) > 0.4 ||
-      getPartOfView(bounds) > 0.4
+      getPartOfBounds(bounds, viewTop, viewBottom) > 0.4 ||
+      getPartOfView(bounds, viewTop, viewBottom) > 0.4
     );
   }
 
@@ -69,7 +69,7 @@ export function dtfNavigationKeys () {
   function computeOffset (targetElement) {
     let targetElementTop = targetElement.getBoundingClientRect().top;
     let topMargin = 15;
-    let targetOffset = targetElementTop - viewTop - topMargin;
+    let targetOffset = targetElementTop - _viewTop - topMargin;
 
     //Reveal both .feed_header and .new_entries
     if (targetElement.isSameNode(document.querySelector('.feed__item'))) {
@@ -94,9 +94,9 @@ export function dtfNavigationKeys () {
       let element = elements[i];
       let bounds = element.getBoundingClientRect();
       let isCurrentElement =
-        isApproaching(bounds) &&
-        isPartInbound(bounds) &&
-        isVisibleEnough(bounds);
+        isApproaching(bounds, _viewTop, _viewBottom) &&
+        isPartInbound(bounds, _viewTop, _viewBottom) &&
+        isVisibleEnough(bounds, _viewTop, _viewBottom);
       if (isCurrentElement) {
         return i;
       }
@@ -117,8 +117,8 @@ export function dtfNavigationKeys () {
       if (document.querySelectorAll('.feed__item').length === 0) return;
 
       let menuElement = document.getElementsByClassName('main_menu layout')[0];
-      viewTop = menuElement.clientHeight;
-      viewBottom = document.documentElement.clientHeight;
+      _viewTop = menuElement.clientHeight;
+      _viewBottom = document.documentElement.clientHeight;
 
       let elements = selectElements();
       let i = indexOfCurrent(elements);
@@ -150,9 +150,9 @@ export function dtfNavigationKeys () {
 
   //Below is the code for debugging purposes
   var feedItems = Array.from(document.getElementsByClassName('feed__item'));
-  var laterItems = feedItems.filter(item => isApproaching(item.getBoundingClientRect()));
-  var partItems = laterItems.filter(item => isPartInbound(item.getBoundingClientRect()));
-  var fullItems = partItems.filter(item => isFullInbound(item.getBoundingClientRect()));
+  var laterItems = feedItems.filter(item => isApproaching(item.getBoundingClientRect(), _viewTop, _viewBottom));
+  var partItems = laterItems.filter(item => isPartInbound(item.getBoundingClientRect(), _viewTop, _viewBottom));
+  var fullItems = partItems.filter(item => isFullInbound(item.getBoundingClientRect(), _viewTop, _viewBottom));
 
   feedItems.forEach(item => item.lastElementChild.removeAttribute('style'));
   partItems.forEach(item => item.lastElementChild.style.background = '#aaf');
@@ -161,22 +161,22 @@ export function dtfNavigationKeys () {
   for (let i = 0; i < partItems.length; i++) {
     let item = partItems[i];
     let bounds = item.getBoundingClientRect();
-    if (isVisibleEnough(bounds)) {
+    if (isVisibleEnough(bounds, _viewTop, _viewBottom)) {
       item.lastElementChild.style.background = '#afa';
       console.log(item);
       console.log(`
-        getHiddenTop     ${getHiddenTop(bounds)}
-        getHiddenBottom  ${getHiddenBottom(bounds)}
-        getVisible       ${getVisible(bounds)}
+        getHiddenTop     ${getHiddenTop(bounds, _viewTop, _viewBottom)}
+        getHiddenBottom  ${getHiddenBottom(bounds, _viewTop, _viewBottom)}
+        getVisible       ${getVisible(bounds, _viewTop, _viewBottom)}
         bounds.height    ${bounds.height}
         -
-        getVisible       ${getVisible(bounds)}
+        getVisible       ${getVisible(bounds, _viewTop, _viewBottom)}
         bounds.height    ${bounds.height}
-        getPartOfBounds  ${getPartOfBounds(bounds)}
+        getPartOfBounds  ${getPartOfBounds(bounds, _viewTop, _viewBottom)}
         -
-        getVisible       ${getVisible(bounds)}
-        viewBottom       ${viewBottom}
-        getPartOfView    ${getPartOfView(bounds)}
+        getVisible       ${getVisible(bounds, _viewTop, _viewBottom)}
+        viewBottom       ${_viewBottom}
+        getPartOfView    ${getPartOfView(bounds, _viewTop, _viewBottom)}
       `.replace(/^\s+/gm, ''));
       break;
     }
