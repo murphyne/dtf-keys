@@ -15,8 +15,7 @@ import {
 export function dtfNavigationKeys () {
   'use strict';
 
-  let _viewTop;
-  let _viewBottom;
+  let view = DOMRect.fromRect();
 
   function selectElements () {
     let selectors = [
@@ -37,7 +36,7 @@ export function dtfNavigationKeys () {
   function computeOffset (targetElement) {
     let targetElementTop = targetElement.getBoundingClientRect().top;
     let topMargin = 15;
-    let targetOffset = targetElementTop - _viewTop - topMargin;
+    let targetOffset = targetElementTop - view.top - topMargin;
 
     //Reveal both .feed_header and .new_entries
     if (targetElement.isSameNode(document.querySelector('.feed__item'))) {
@@ -61,7 +60,7 @@ export function dtfNavigationKeys () {
     for (var i = 0; i < elements.length; i++) {
       let element = elements[i];
       let bounds = element.getBoundingClientRect();
-      if (isCurrent(bounds, _viewTop, _viewBottom)) {
+      if (isCurrent(bounds, view.top, view.bottom)) {
         return i;
       }
     }
@@ -81,8 +80,8 @@ export function dtfNavigationKeys () {
       if (document.querySelectorAll('.feed__item').length === 0) return;
 
       let menuElement = document.getElementsByClassName('main_menu layout')[0];
-      _viewTop = menuElement.clientHeight;
-      _viewBottom = document.documentElement.clientHeight;
+      view.y = menuElement.clientHeight;
+      view.height = document.documentElement.clientHeight - view.y;
 
       let elements = selectElements();
       let i = indexOfCurrent(elements);

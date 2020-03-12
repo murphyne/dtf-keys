@@ -6,10 +6,14 @@ describe('main.js', function () {
     global.document = {
       addEventListener: sinon.fake(),
     };
+    global.DOMRect = {
+      fromRect: sinon.fake(),
+    }
   });
 
   afterEach(function () {
     delete global.document;
+    delete global.DOMRect;
   });
 
   it('Adds EventListener to document', async function () {
