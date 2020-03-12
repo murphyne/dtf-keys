@@ -10,7 +10,7 @@ import {
   getPartOfBounds,
   getPartOfView,
   isVisibleEnough,
-} from '../src/index.js';
+} from '../src/bounds.js';
 
 
 function r ({x=0, y=0, w=0, h=0}) {
