@@ -11,6 +11,7 @@ import {
   getPartOfBounds,
   getPartOfView,
   isVisibleEnough,
+  isCurrent,
 } from '../src/bounds.js';
 
 
@@ -293,6 +294,30 @@ describe('bounds', function () {
       const rect = r({y: test.ry, h: test.rh});
       const view = r({y: test.vy, h: test.vh});
       const result = isVisibleEnough(rect, view.top, view.bottom);
+      chai.assert.equal(result, test.expected,
+        `(ry:${test.ry}, rh:${test.rh}) (vy:${test.vy}, vh:${test.vh})`);
+    });
+  });
+
+  it(`${isCurrent.name}`, function () {
+    const tests = [
+      {ry: 200, rh: 20, vy: 10, vh: 100, expected: false},
+      {ry: 110, rh: 20, vy: 10, vh: 100, expected: false},
+      {ry: 100, rh: 20, vy: 10, vh: 100, expected:  true},
+      {ry:  90, rh: 20, vy: 10, vh: 100, expected:  true},
+      {ry:  50, rh: 20, vy: 10, vh: 100, expected:  true},
+      {ry:  10, rh: 20, vy: 10, vh: 100, expected:  true},
+      {ry:   0, rh: 20, vy: 10, vh: 100, expected:  true},
+      {ry: -10, rh: 21, vy: 10, vh: 100, expected: false},
+      {ry: -10, rh: 20, vy: 10, vh: 100, expected: false},
+      {ry: -20, rh: 20, vy: 10, vh: 100, expected: false},
+      {ry: -80, rh: 20, vy: 10, vh: 100, expected: false},
+    ];
+
+    tests.forEach(function (test) {
+      const rect = r({y: test.ry, h: test.rh});
+      const view = r({y: test.vy, h: test.vh});
+      const result = isCurrent(rect, view.top, view.bottom);
       chai.assert.equal(result, test.expected,
         `(ry:${test.ry}, rh:${test.rh}) (vy:${test.vy}, vh:${test.vh})`);
     });

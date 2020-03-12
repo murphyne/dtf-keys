@@ -8,6 +8,7 @@ export {
   getPartOfBounds,
   getPartOfView,
   isVisibleEnough,
+  isCurrent,
 };
 
 //https://docs.microsoft.com/en-us/previous-versions//hh781509(v=vs.85)
@@ -53,6 +54,14 @@ function isVisibleEnough (bounds, viewTop, viewBottom) {
   return (
     getPartOfBounds(bounds, viewTop, viewBottom) > 0.4 ||
     getPartOfView(bounds, viewTop, viewBottom) > 0.4
+  );
+}
+
+function isCurrent(bounds, viewTop, viewBottom) {
+  return (
+    isApproaching(bounds, viewTop, viewBottom) &&
+    isPartInbound(bounds, viewTop, viewBottom) &&
+    isVisibleEnough(bounds, viewTop, viewBottom)
   );
 }
 

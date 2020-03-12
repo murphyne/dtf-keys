@@ -8,6 +8,7 @@ import {
   getPartOfBounds,
   getPartOfView,
   isVisibleEnough,
+  isCurrent,
 } from './bounds.js';
 
 
@@ -60,11 +61,7 @@ export function dtfNavigationKeys () {
     for (var i = 0; i < elements.length; i++) {
       let element = elements[i];
       let bounds = element.getBoundingClientRect();
-      let isCurrentElement =
-        isApproaching(bounds, _viewTop, _viewBottom) &&
-        isPartInbound(bounds, _viewTop, _viewBottom) &&
-        isVisibleEnough(bounds, _viewTop, _viewBottom);
-      if (isCurrentElement) {
+      if (isCurrent(bounds, _viewTop, _viewBottom)) {
         return i;
       }
     }
