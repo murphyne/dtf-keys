@@ -102,7 +102,7 @@ describe('bounds', function () {
     tests.forEach(function (test) {
       const rect = r({y: test.ry, h: test.rh});
       const view = r({y: test.vy, h: test.vh});
-      const result = isApproaching(rect, view.top, view.bottom);
+      const result = isApproaching(rect, view);
       chai.assert.equal(result, test.expected,
         `(ry:${test.ry}, rh:${test.rh}) (vy:${test.vy}, vh:${test.vh})`);
     });
@@ -125,7 +125,7 @@ describe('bounds', function () {
     tests.forEach(function (test) {
       const rect = r({y: test.ry, h: test.rh});
       const view = r({y: test.vy, h: test.vh});
-      const result = isPartInbound(rect, view.top, view.bottom);
+      const result = isPartInbound(rect, view);
       chai.assert.equal(result, test.expected,
         `(ry:${test.ry}, rh:${test.rh}) (vy:${test.vy}, vh:${test.vh})`);
     });
@@ -149,7 +149,7 @@ describe('bounds', function () {
     tests.forEach(function (test) {
       const rect = r({y: test.ry, h: test.rh});
       const view = r({y: test.vy, h: test.vh});
-      const result = isFullInbound(rect, view.top, view.bottom);
+      const result = isFullInbound(rect, view);
       chai.assert.equal(result, test.expected,
         `(ry:${test.ry}, rh:${test.rh}) (vy:${test.vy}, vh:${test.vh})`);
     });
@@ -173,7 +173,7 @@ describe('bounds', function () {
     tests.forEach(function (test) {
       const rect = r({y: test.ry, h: test.rh});
       const view = r({y: test.vy, h: test.vh});
-      const result = getHiddenTop(rect, view.top, view.bottom);
+      const result = getHiddenTop(rect, view);
       chai.assert.equal(result, test.expected,
         `(ry:${test.ry}, rh:${test.rh}) (vy:${test.vy}, vh:${test.vh})`);
     });
@@ -197,7 +197,7 @@ describe('bounds', function () {
     tests.forEach(function (test) {
       const rect = r({y: test.ry, h: test.rh});
       const view = r({y: test.vy, h: test.vh});
-      const result = getHiddenBottom(rect, view.top, view.bottom);
+      const result = getHiddenBottom(rect, view);
       chai.assert.equal(result, test.expected,
         `(ry:${test.ry}, rh:${test.rh}) (vy:${test.vy}, vh:${test.vh})`);
     });
@@ -221,7 +221,7 @@ describe('bounds', function () {
     tests.forEach(function (test) {
       const rect = r({y: test.ry, h: test.rh});
       const view = r({y: test.vy, h: test.vh});
-      const result = getVisible(rect, view.top, view.bottom);
+      const result = getVisible(rect, view);
       chai.assert.equal(result, test.expected,
         `(ry:${test.ry}, rh:${test.rh}) (vy:${test.vy}, vh:${test.vh})`);
     });
@@ -245,7 +245,7 @@ describe('bounds', function () {
     tests.forEach(function (test) {
       const rect = r({y: test.ry, h: test.rh});
       const view = r({y: test.vy, h: test.vh});
-      const result = getPartOfBounds(rect, view.top, view.bottom);
+      const result = getPartOfBounds(rect, view);
       chai.assert.equal(result, test.expected,
         `(ry:${test.ry}, rh:${test.rh}) (vy:${test.vy}, vh:${test.vh})`);
     });
@@ -269,7 +269,7 @@ describe('bounds', function () {
     tests.forEach(function (test) {
       const rect = r({y: test.ry, h: test.rh});
       const view = r({y: test.vy, h: test.vh});
-      const result = getPartOfView(rect, view.top, view.bottom);
+      const result = getPartOfView(rect, view);
       chai.assert.equal(result, test.expected,
         `(ry:${test.ry}, rh:${test.rh}) (vy:${test.vy}, vh:${test.vh})`);
     });
@@ -293,7 +293,7 @@ describe('bounds', function () {
     tests.forEach(function (test) {
       const rect = r({y: test.ry, h: test.rh});
       const view = r({y: test.vy, h: test.vh});
-      const result = isVisibleEnough(rect, view.top, view.bottom);
+      const result = isVisibleEnough(rect, view);
       chai.assert.equal(result, test.expected,
         `(ry:${test.ry}, rh:${test.rh}) (vy:${test.vy}, vh:${test.vh})`);
     });
@@ -317,7 +317,7 @@ describe('bounds', function () {
     tests.forEach(function (test) {
       const rect = r({y: test.ry, h: test.rh});
       const view = r({y: test.vy, h: test.vh});
-      const result = isCurrent(rect, view.top, view.bottom);
+      const result = isCurrent(rect, view);
       chai.assert.equal(result, test.expected,
         `(ry:${test.ry}, rh:${test.rh}) (vy:${test.vy}, vh:${test.vh})`);
     });

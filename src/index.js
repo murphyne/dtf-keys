@@ -60,7 +60,7 @@ export function dtfNavigationKeys () {
     for (var i = 0; i < elements.length; i++) {
       let element = elements[i];
       let bounds = element.getBoundingClientRect();
-      if (isCurrent(bounds, view.top, view.bottom)) {
+      if (isCurrent(bounds, view)) {
         return i;
       }
     }
