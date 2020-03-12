@@ -145,40 +145,4 @@ export function dtfNavigationKeys () {
       }
     }
   });
-
-  return;
-
-  //Below is the code for debugging purposes
-  var feedItems = Array.from(document.getElementsByClassName('feed__item'));
-  var laterItems = feedItems.filter(item => isApproaching(item.getBoundingClientRect(), _viewTop, _viewBottom));
-  var partItems = laterItems.filter(item => isPartInbound(item.getBoundingClientRect(), _viewTop, _viewBottom));
-  var fullItems = partItems.filter(item => isFullInbound(item.getBoundingClientRect(), _viewTop, _viewBottom));
-
-  feedItems.forEach(item => item.lastElementChild.removeAttribute('style'));
-  partItems.forEach(item => item.lastElementChild.style.background = '#aaf');
-  fullItems.forEach(item => item.lastElementChild.style.background = '#faa');
-
-  for (let i = 0; i < partItems.length; i++) {
-    let item = partItems[i];
-    let bounds = item.getBoundingClientRect();
-    if (isVisibleEnough(bounds, _viewTop, _viewBottom)) {
-      item.lastElementChild.style.background = '#afa';
-      console.log(item);
-      console.log(`
-        getHiddenTop     ${getHiddenTop(bounds, _viewTop, _viewBottom)}
-        getHiddenBottom  ${getHiddenBottom(bounds, _viewTop, _viewBottom)}
-        getVisible       ${getVisible(bounds, _viewTop, _viewBottom)}
-        bounds.height    ${bounds.height}
-        -
-        getVisible       ${getVisible(bounds, _viewTop, _viewBottom)}
-        bounds.height    ${bounds.height}
-        getPartOfBounds  ${getPartOfBounds(bounds, _viewTop, _viewBottom)}
-        -
-        getVisible       ${getVisible(bounds, _viewTop, _viewBottom)}
-        viewBottom       ${_viewBottom}
-        getPartOfView    ${getPartOfView(bounds, _viewTop, _viewBottom)}
-      `.replace(/^\s+/gm, ''));
-      break;
-    }
-  }
 }
