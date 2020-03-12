@@ -63,6 +63,12 @@ describe('selenium', function () {
     //Take a pause before exiting
     await driver.sleep(3000);
 
+    //Print any new log entries
+    await driver.manage().logs().get('browser')
+      .then(entries => entries.map(function (entry) {
+        console.log(entry.timestamp, entry.message);
+      }));
+
     await driver.quit();
   });
 
