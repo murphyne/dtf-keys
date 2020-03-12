@@ -14,54 +14,54 @@ export {
 //https://docs.microsoft.com/en-us/previous-versions//hh781509(v=vs.85)
 //https://learn.javascript.ru/coordinates
 
-function isApproaching (bounds, view) {
-  return bounds.bottom > view.top;
+function isApproaching (rect, view) {
+  return rect.bottom > view.top;
 }
 
-function isPartInbound (bounds, view) {
-  return (bounds.bottom > view.top) && (bounds.top < view.bottom);
+function isPartInbound (rect, view) {
+  return (rect.bottom > view.top) && (rect.top < view.bottom);
 }
 
-function isFullInbound (bounds, view) {
-  return (bounds.top >= view.top) && (bounds.bottom <= view.bottom);
+function isFullInbound (rect, view) {
+  return (rect.top >= view.top) && (rect.bottom <= view.bottom);
 }
 
-function getHiddenTop (bounds, view) {
-  return clamp(view.top - bounds.top, 0, bounds.height);
+function getHiddenTop (rect, view) {
+  return clamp(view.top - rect.top, 0, rect.height);
 }
 
-function getHiddenBottom (bounds, view) {
-  return clamp(bounds.bottom - view.bottom, 0, bounds.height);
+function getHiddenBottom (rect, view) {
+  return clamp(rect.bottom - view.bottom, 0, rect.height);
 }
 
-function getVisible (bounds, view) {
-  let hiddenTop = getHiddenTop(bounds, view);
-  let hiddenBottom = getHiddenBottom(bounds, view);
-  return bounds.height - hiddenTop - hiddenBottom;
+function getVisible (rect, view) {
+  let hiddenTop = getHiddenTop(rect, view);
+  let hiddenBottom = getHiddenBottom(rect, view);
+  return rect.height - hiddenTop - hiddenBottom;
 }
 
-function getPartOfBounds (bounds, view) {
-  let visible = getVisible(bounds, view);
-  return visible / bounds.height;
+function getPartOfBounds (rect, view) {
+  let visible = getVisible(rect, view);
+  return visible / rect.height;
 }
 
-function getPartOfView (bounds, view) {
-  let visible = getVisible(bounds, view);
+function getPartOfView (rect, view) {
+  let visible = getVisible(rect, view);
   return visible / view.height;
 }
 
-function isVisibleEnough (bounds, view) {
+function isVisibleEnough (rect, view) {
   return (
-    getPartOfBounds(bounds, view) > 0.4 ||
-    getPartOfView(bounds, view) > 0.4
+    getPartOfBounds(rect, view) > 0.4 ||
+    getPartOfView(rect, view) > 0.4
   );
 }
 
-function isCurrent(bounds, view) {
+function isCurrent(rect, view) {
   return (
-    isApproaching(bounds, view) &&
-    isPartInbound(bounds, view) &&
-    isVisibleEnough(bounds, view)
+    isApproaching(rect, view) &&
+    isPartInbound(rect, view) &&
+    isVisibleEnough(rect, view)
   );
 }
 
