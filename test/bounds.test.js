@@ -1,4 +1,5 @@
 import chai from 'chai';
+import fc from 'fast-check';
 
 import {
   isApproaching,
@@ -25,6 +26,59 @@ function r ({x=0, y=0, w=0, h=0}) {
     left: Math.min(x, x + w),
   };
 }
+
+describe('rect', function () {
+  it(`uses provided x, y, w, h as is`, function () {
+    fc.assert(
+      fc.property(
+        fc.double(), fc.double(), fc.double(), fc.double(),
+        (x, y, w, h) => {
+          const rect = r({x, y, w, h});
+          chai.assert.equal(rect.x, x);
+          chai.assert.equal(rect.y, y);
+          chai.assert.equal(rect.width, w);
+          chai.assert.equal(rect.height, h);
+        }
+      )
+    );
+  });
+
+  it(`handles positive width, height values`, function () {
+    fc.assert(
+      fc.property(
+        fc.double(Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER),
+        fc.double(Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER),
+        fc.double(0, Number.MAX_SAFE_INTEGER),
+        fc.double(0, Number.MAX_SAFE_INTEGER),
+        (x, y, w, h) => {
+          const rect = r({x, y, w, h});
+          chai.assert.equal(rect.top, y);
+          chai.assert.equal(rect.bottom, y + h);
+          chai.assert.equal(rect.left, x);
+          chai.assert.equal(rect.right, x + w);
+        }
+      )
+    );
+  });
+
+  it(`handles negative width, height values`, function () {
+    fc.assert(
+      fc.property(
+        fc.double(Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER),
+        fc.double(Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER),
+        fc.double(Number.MIN_SAFE_INTEGER, 0),
+        fc.double(Number.MIN_SAFE_INTEGER, 0),
+        (x, y, w, h) => {
+          const rect = r({x, y, w, h});
+          chai.assert.equal(rect.top, y + h);
+          chai.assert.equal(rect.bottom, y);
+          chai.assert.equal(rect.left, x + w);
+          chai.assert.equal(rect.right, x);
+        }
+      )
+    );
+  });
+});
 
 describe('bounds', function () {
   it(`${isApproaching.name}`, function () {
