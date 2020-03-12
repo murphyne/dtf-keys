@@ -18,5 +18,6 @@ describe('main.js', function () {
     await import('../src/main.js');
 
     chai.assert.isTrue(document.addEventListener.called);
+    chai.assert.isTrue(document.addEventListener.calledWith('keydown'));
   });
 });
