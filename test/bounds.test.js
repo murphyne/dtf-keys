@@ -15,6 +15,16 @@ import {
 } from '../src/bounds.js';
 
 
+/**
+ * Creates a new stub instance of DOMRect
+ * with a given position and size
+ * @param {Object} rectInit
+ * @param {number} rectInit.x
+ * @param {number} rectInit.y
+ * @param {number} rectInit.w
+ * @param {number} rectInit.h
+ * @returns {DOMRect}
+ */
 function r ({x=0, y=0, w=0, h=0}) {
   return {
     x: x,
