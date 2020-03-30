@@ -1,3 +1,4 @@
+import fs from 'fs';
 import path from 'path';
 import chai from 'chai';
 import sinon from 'sinon';
@@ -100,6 +101,38 @@ describe('selenium', function () {
 
     //Check scroll count
     chai.assert.equal(await retrieveScrollCount(driver), 2);
+  });
+
+  it('userscript handles `e` keydown', async function () {
+    //Set timeout for current mocha test
+    this.timeout(5000);
+
+    //Inject sinon in the page
+    const sinonPath = './node_modules/sinon/pkg/sinon.js';
+    const sinonSrc = fs.readFileSync(sinonPath).toString();
+    await driver.executeScript(sinonSrc);
+
+    //Fake Tampermonkey API
+    await driver.executeScript(function () {
+      window.GM = {
+        openInTab: sinon.fake(),
+      };
+    });
+
+    //Press the `e` button
+    //console.log('Press the `e` button');
+    await driver.actions().keyDown('e').perform();
+
+    //Check that required TM API function was called
+    chai.assert.isTrue(
+      await driver.executeScript(() => GM.openInTab.calledOnce),
+      'userscript should call TM API function');
+
+    //Check that required TM API function was called with expected arguments
+    chai.assert.match(
+      await driver.executeScript(() => GM.openInTab.getCall(0).args[0]),
+      new RegExp('https://dtf.ru/[\\w_/]+/\\d+'),
+      'userscript should call TM API function with expected arguments');
   });
 
   it('userscript handles `x` keydown', async function () {

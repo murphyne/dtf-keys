@@ -96,6 +96,22 @@ export function dtfNavigationKeys () {
 
       window.scrollBy({ left: 0, top: targetOffset, behavior: 'smooth' });
     }
+    else if (['e'].includes(key) && !modifier) {
+      if (document.querySelectorAll('.feed__item').length === 0) return;
+
+      let menuElement = document.getElementsByClassName('main_menu layout')[0];
+      view.y = menuElement.clientHeight;
+      view.height = document.documentElement.clientHeight - view.y;
+
+      let elements = selectElements();
+      let i = indexOfCurrent(elements);
+
+      let targetElement = elements[i];
+
+      let url = targetElement.querySelector('a.content-feed__link').href;
+
+      GM.openInTab(url, true);
+    }
     else if (['z','c'].includes(key) && !modifier) {
       //console.log(event);
 

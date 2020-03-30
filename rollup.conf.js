@@ -6,7 +6,7 @@ let bannerText = `
 // @description  Navigate with keys!
 // @author       mr-m
 // @match        *://dtf.ru/*
-// @grant        none
+// @grant        GM.openInTab
 // ==/UserScript==
 `;
 
