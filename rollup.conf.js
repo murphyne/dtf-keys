@@ -2,7 +2,7 @@ let bannerText = `
 // ==UserScript==
 // @name         DTF: Navigate with keys
 // @namespace    http://tampermonkey.net/
-// @version      0.3.0
+// @version      0.4.0
 // @description  Navigate with keys!
 // @author       mr-m
 // @match        *://dtf.ru/*
