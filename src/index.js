@@ -68,6 +68,9 @@ export function dtfNavigationKeys () {
 
   //https://bureau.ru/soviet/20190815/
   document.addEventListener('keydown', function (event) {
+    //console.log("%O %O", event.target === document.body, event);
+    if (event.target !== document.body) return;
+
     let key = event.key.toLowerCase();
     let keyHeld = event.repeat;
     let alt = event.altKey;

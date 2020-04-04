@@ -212,4 +212,41 @@ describe('selenium', function () {
     //Check scroll count
     chai.assert.equal(await retrieveScrollCount(driver), 6);
   });
+
+  it('userscript ignores keydown if input is focused', async function () {
+    //Set timeout for current mocha test
+    this.timeout(5000);
+
+    //Check scroll count
+    chai.assert.equal(await retrieveScrollCount(driver), 6);
+
+    //Find the search input
+    const locator = webdriver.By.className('search__input');
+    const element = driver.findElement(locator);
+
+    //Press the `d` button
+    //console.log('Press the `d` button');
+    await element.sendKeys('d');
+
+    try {
+      //Wait for scroll to stop (should throw TimeoutError)
+      await driver.wait(untilScrollCountIs(7), 1000);
+
+      //Fail if there was no TimeoutError
+      chai.assert.fail('`d` key should not trigger a scroll');
+    }
+    catch (err) {
+      //Check that wait for scroll was unsuccessful
+      chai.assert.instanceOf(err, webdriver.error.TimeoutError);
+    }
+    finally {
+      //Check that scroll count haven't changed
+      chai.assert.equal(await retrieveScrollCount(driver), 6,
+        'keydown in input should not trigger a scroll');
+
+      //Check that input received its value
+      chai.assert.equal(await element.getAttribute('value'), 'd',
+        'userscript should not intercept keydown in input');
+    }
+  });
 });
