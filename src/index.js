@@ -25,6 +25,7 @@ export function dtfNavigationKeys () {
       '.subsite_head:first-of-type',
       '.news_widget',
       '.teaserPodcast',
+      '.island.island--expanded.island--blogs_entries',
       '.vacancies_widget',
       '.widget_wrapper',
       '.feed__item',
