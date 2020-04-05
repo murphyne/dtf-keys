@@ -1,9 +1,30 @@
 import webdriver from 'selenium-webdriver';
 
 export {
+  injectScrollCount,
   retrieveScrollCount,
   untilScrollCountIs,
 };
+
+//https://vanillajstoolkit.com/helpers/scrollstop/
+function initScrollCount () {
+  let timeout;
+  window.scrollCount = 0;
+  window.document.addEventListener('scroll', function (event) {
+    window.clearTimeout(timeout);
+    timeout = window.setTimeout(function () {
+      window.scrollCount += 1;
+    }, 60);
+  });
+}
+
+/**
+ * @param {webdriver.WebDriver} driver
+ * @returns {Promise<void>}
+ */
+function injectScrollCount (driver) {
+  return driver.executeScript(initScrollCount);
+}
 
 function getScrollTop () { return document.scrollingElement.scrollTop; }
 function getScrollCount () { return Number(window.scrollCount); }

@@ -6,6 +6,7 @@ import rollup from 'rollup';
 import webdriver from 'selenium-webdriver';
 
 import {
+  injectScrollCount,
   retrieveScrollCount,
   untilScrollCountIs,
 } from './selenium-utilities.js';
@@ -39,17 +40,7 @@ describe('selenium', function () {
     //await driver.get('http://dtf.ru/');
 
     //Subscribe to `scroll` events
-    //https://vanillajstoolkit.com/helpers/scrollstop/
-    await driver.executeScript(function () {
-      let timeout;
-      window.scrollCount = 0;
-      window.document.addEventListener('scroll', function (event) {
-        window.clearTimeout(timeout);
-        timeout = window.setTimeout(function () {
-          window.scrollCount += 1;
-        }, 60);
-      });
-    });
+    await injectScrollCount(driver);
 
     //Generate the code
     let bundle = await rollup.rollup({ input: './src/main.js' });
