@@ -238,6 +238,8 @@ describe('selenium', function () {
       //Check that input received its value
       chai.assert.equal(await element.getAttribute('value'), 'd',
         'userscript should not intercept keydown in input');
+
+      await driver.executeScript(() => document.activeElement.blur());
     }
   });
 });
