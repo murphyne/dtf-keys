@@ -2,6 +2,7 @@ import webdriver from 'selenium-webdriver';
 
 export {
   injectScrollCount,
+  retrieveScrollTop,
   retrieveScrollCount,
   untilScrollCountIs,
 };
