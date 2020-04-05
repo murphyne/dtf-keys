@@ -83,6 +83,9 @@ describe('selenium', function () {
     //Wait for scroll to stop
     await driver.wait(untilScrollCountIs(1), 1000);
 
+    //Check scroll count
+    chai.assert.equal(await retrieveScrollCount(driver), 1);
+
     //Press the `d` button
     //console.log('Press the `d` button');
     await driver.actions().keyDown('d').perform();
@@ -92,6 +95,16 @@ describe('selenium', function () {
 
     //Check scroll count
     chai.assert.equal(await retrieveScrollCount(driver), 2);
+
+    //Press the `d` button
+    //console.log('Press the `d` button');
+    await driver.actions().keyDown('d').perform();
+
+    //Wait for scroll to stop
+    await driver.wait(untilScrollCountIs(3), 1000);
+
+    //Check scroll count
+    chai.assert.equal(await retrieveScrollCount(driver), 3);
   });
 
   it('userscript handles `e` keydown', async function () {
@@ -136,7 +149,7 @@ describe('selenium', function () {
 
     //Check that scroll count haven't changed
     try {
-      await driver.wait(untilScrollCountIs(3), 1000);
+      await driver.wait(untilScrollCountIs(4), 1000);
       chai.assert.fail('`x` key should not trigger a scroll');
     }
     catch (err) {
@@ -153,10 +166,10 @@ describe('selenium', function () {
     await driver.actions().keyDown('a').perform();
 
     //Wait for scroll to stop
-    await driver.wait(untilScrollCountIs(3), 1000);
+    await driver.wait(untilScrollCountIs(4), 1000);
 
     //Check scroll count
-    chai.assert.equal(await retrieveScrollCount(driver), 3);
+    chai.assert.equal(await retrieveScrollCount(driver), 4);
   });
 
   it('userscript handles `c` keydown', async function () {
@@ -168,10 +181,10 @@ describe('selenium', function () {
     await driver.actions().keyDown('c').perform();
 
     //Wait for scroll to stop
-    await driver.wait(untilScrollCountIs(4), 1000);
+    await driver.wait(untilScrollCountIs(5), 1000);
 
     //Check scroll count
-    chai.assert.equal(await retrieveScrollCount(driver), 4);
+    chai.assert.equal(await retrieveScrollCount(driver), 5);
   });
 
   it('userscript handles `x` keydown', async function () {
@@ -183,10 +196,10 @@ describe('selenium', function () {
     await driver.actions().keyDown('x').perform();
 
     //Wait for scroll to stop
-    await driver.wait(untilScrollCountIs(5), 1000);
+    await driver.wait(untilScrollCountIs(6), 1000);
 
     //Check scroll count
-    chai.assert.equal(await retrieveScrollCount(driver), 5);
+    chai.assert.equal(await retrieveScrollCount(driver), 6);
   });
 
   it('userscript handles `z` keydown', async function () {
@@ -198,10 +211,10 @@ describe('selenium', function () {
     await driver.actions().keyDown('z').perform();
 
     //Wait for scroll to stop
-    await driver.wait(untilScrollCountIs(6), 1000);
+    await driver.wait(untilScrollCountIs(7), 1000);
 
     //Check scroll count
-    chai.assert.equal(await retrieveScrollCount(driver), 6);
+    chai.assert.equal(await retrieveScrollCount(driver), 7);
   });
 
   it('userscript ignores keydown if input is focused', async function () {
@@ -209,7 +222,7 @@ describe('selenium', function () {
     this.timeout(5000);
 
     //Check scroll count
-    chai.assert.equal(await retrieveScrollCount(driver), 6);
+    chai.assert.equal(await retrieveScrollCount(driver), 7);
 
     //Find the search input
     const locator = webdriver.By.className('search__input');
@@ -221,7 +234,7 @@ describe('selenium', function () {
 
     try {
       //Wait for scroll to stop (should throw TimeoutError)
-      await driver.wait(untilScrollCountIs(7), 1000);
+      await driver.wait(untilScrollCountIs(8), 1000);
 
       //Fail if there was no TimeoutError
       chai.assert.fail('`d` key should not trigger a scroll');
@@ -232,7 +245,7 @@ describe('selenium', function () {
     }
     finally {
       //Check that scroll count haven't changed
-      chai.assert.equal(await retrieveScrollCount(driver), 6,
+      chai.assert.equal(await retrieveScrollCount(driver), 7,
         'keydown in input should not trigger a scroll');
 
       //Check that input received its value
