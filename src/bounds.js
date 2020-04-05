@@ -7,6 +7,7 @@ export {
   getVisible,
   getPartOfBounds,
   getPartOfView,
+  isExpanded,
   isVisibleEnough,
   isCurrent,
 };
@@ -48,6 +49,10 @@ function getPartOfBounds (rect, view) {
 function getPartOfView (rect, view) {
   let visible = getVisible(rect, view);
   return visible / view.height;
+}
+
+function isExpanded (rect, view) {
+  return rect.height > 0;
 }
 
 function isVisibleEnough (rect, view) {

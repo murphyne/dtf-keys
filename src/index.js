@@ -7,6 +7,7 @@ import {
   getVisible,
   getPartOfBounds,
   getPartOfView,
+  isExpanded,
   isVisibleEnough,
   isCurrent,
 } from './bounds.js';
@@ -25,6 +26,7 @@ export function dtfNavigationKeys () {
       '.subsite_head:first-of-type',
       '.news_widget',
       '.teaserPodcast',
+      '.daily-promo-unit',
       '.island.island--expanded.island--blogs_entries',
       '.vacancies_widget',
       '.widget_wrapper',
@@ -32,6 +34,13 @@ export function dtfNavigationKeys () {
     ].join(',');
 
     return Array.from(document.querySelectorAll(selectors));
+  }
+
+  function filterElements (elements) {
+    return elements.filter(function (element, i, arr) {
+      let bounds = element.getBoundingClientRect();
+      return isExpanded(bounds, view);
+    });
   }
 
   function computeOffset (targetElement) {
@@ -87,7 +96,7 @@ export function dtfNavigationKeys () {
       view.y = menuElement.clientHeight;
       view.height = document.documentElement.clientHeight - view.y;
 
-      let elements = selectElements();
+      let elements = filterElements(selectElements());
       let i = indexOfCurrent(elements);
 
       let targetElement = {
@@ -107,7 +116,7 @@ export function dtfNavigationKeys () {
       view.y = menuElement.clientHeight;
       view.height = document.documentElement.clientHeight - view.y;
 
-      let elements = selectElements();
+      let elements = filterElements(selectElements());
       let i = indexOfCurrent(elements);
 
       let targetElement = elements[i];
