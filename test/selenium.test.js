@@ -139,7 +139,7 @@ describe('selenium', function () {
       'userscript should call TM API function with expected arguments');
   });
 
-  it('userscript handles `x` keydown', async function () {
+  it('userscript stays in place if already at target', async function () {
     //Set timeout for current mocha test
     this.timeout(5000);
 
@@ -147,13 +147,21 @@ describe('selenium', function () {
     //console.log('Press the `x` button');
     await driver.actions().keyDown('x').perform();
 
-    //Check that scroll count haven't changed
     try {
+      //Wait for scroll to stop (should throw TimeoutError)
       await driver.wait(untilScrollCountIs(4), 1000);
+
+      //Fail if there was no TimeoutError
       chai.assert.fail('`x` key should not trigger a scroll');
     }
     catch (err) {
+      //Check that wait for scroll was unsuccessful
       chai.assert.instanceOf(err, webdriver.error.TimeoutError);
+    }
+    finally {
+      //Check that scroll count haven't changed
+      chai.assert.equal(await retrieveScrollCount(driver), 3,
+        'keydown should not trigger a scroll');
     }
   });
 
