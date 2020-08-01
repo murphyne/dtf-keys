@@ -92,8 +92,8 @@ export function dtfNavigationKeys () {
     if (['a','d','x'].includes(key) && !modifier && !keyHeld) {
       if (document.querySelectorAll('.feed__item').length === 0) return;
 
-      let menuElement = document.getElementsByClassName('main_menu layout')[0];
-      view.y = menuElement.clientHeight;
+      let siteHeader = document.getElementsByClassName('site-header')[0];
+      view.y = siteHeader.clientHeight;
       view.height = document.documentElement.clientHeight - view.y;
 
       let elements = filterElements(selectElements());
@@ -112,8 +112,8 @@ export function dtfNavigationKeys () {
     else if (['e'].includes(key) && !modifier) {
       if (document.querySelectorAll('.feed__item').length === 0) return;
 
-      let menuElement = document.getElementsByClassName('main_menu layout')[0];
-      view.y = menuElement.clientHeight;
+      let siteHeader = document.getElementsByClassName('site-header')[0];
+      view.y = siteHeader.clientHeight;
       view.height = document.documentElement.clientHeight - view.y;
 
       let elements = filterElements(selectElements());
