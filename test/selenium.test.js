@@ -86,7 +86,7 @@ describe('selenium', function () {
 
     //Check scroll count and position
     chai.assert.equal(await retrieveScrollCount(driver), 1);
-    chai.assert.equal(await retrieveScrollTop(driver), 388);
+    chai.assert.equal(await retrieveScrollTop(driver), 400);
 
     //Press the `d` button
     //console.log('Press the `d` button');
@@ -97,7 +97,7 @@ describe('selenium', function () {
 
     //Check scroll count and position
     chai.assert.equal(await retrieveScrollCount(driver), 2);
-    chai.assert.equal(await retrieveScrollTop(driver), 983);
+    chai.assert.equal(await retrieveScrollTop(driver), 945);
 
     //Press the `d` button
     //console.log('Press the `d` button');
@@ -108,7 +108,7 @@ describe('selenium', function () {
 
     //Check scroll count and position
     chai.assert.equal(await retrieveScrollCount(driver), 3);
-    chai.assert.equal(await retrieveScrollTop(driver), 1458);
+    chai.assert.equal(await retrieveScrollTop(driver), 1693);
 
     //Press the `d` button
     //console.log('Press the `d` button');
@@ -119,7 +119,7 @@ describe('selenium', function () {
 
     //Check scroll count and position
     chai.assert.equal(await retrieveScrollCount(driver), 4);
-    chai.assert.equal(await retrieveScrollTop(driver), 1613);
+    chai.assert.equal(await retrieveScrollTop(driver), 2359);
   });
 
   it('userscript handles `e` keydown', async function () {
@@ -177,7 +177,7 @@ describe('selenium', function () {
       //Check that scroll count and position haven't changed
       chai.assert.equal(await retrieveScrollCount(driver), 4,
         'keydown should not trigger a scroll');
-      chai.assert.equal(await retrieveScrollTop(driver), 1613,
+      chai.assert.equal(await retrieveScrollTop(driver), 2359,
         'keydown should not change scroll position');
     }
   });
@@ -195,7 +195,7 @@ describe('selenium', function () {
 
     //Check scroll count and position
     chai.assert.equal(await retrieveScrollCount(driver), 5);
-    chai.assert.equal(await retrieveScrollTop(driver), 1458);
+    chai.assert.equal(await retrieveScrollTop(driver), 1693);
   });
 
   it('userscript handles `c` keydown', async function () {
@@ -211,7 +211,7 @@ describe('selenium', function () {
 
     //Check scroll count and position
     chai.assert.equal(await retrieveScrollCount(driver), 6);
-    chai.assert.equal(await retrieveScrollTop(driver), 1658);
+    chai.assert.equal(await retrieveScrollTop(driver), 1893);
   });
 
   it('userscript handles `x` keydown', async function () {
@@ -227,7 +227,7 @@ describe('selenium', function () {
 
     //Check scroll count and position
     chai.assert.equal(await retrieveScrollCount(driver), 7);
-    chai.assert.equal(await retrieveScrollTop(driver), 1613);
+    chai.assert.equal(await retrieveScrollTop(driver), 1693);
   });
 
   it('userscript handles `z` keydown', async function () {
@@ -243,7 +243,7 @@ describe('selenium', function () {
 
     //Check scroll count and position
     chai.assert.equal(await retrieveScrollCount(driver), 8);
-    chai.assert.equal(await retrieveScrollTop(driver), 1413);
+    chai.assert.equal(await retrieveScrollTop(driver), 1493);
   });
 
   it('userscript ignores keydown if input is focused', async function () {
@@ -252,7 +252,7 @@ describe('selenium', function () {
 
     //Check scroll count and position
     chai.assert.equal(await retrieveScrollCount(driver), 8);
-    chai.assert.equal(await retrieveScrollTop(driver), 1413);
+    chai.assert.equal(await retrieveScrollTop(driver), 1493);
 
     //Find the search input
     const locator = webdriver.By.className('search__input');
@@ -277,7 +277,7 @@ describe('selenium', function () {
       //Check that scroll count and position haven't changed
       chai.assert.equal(await retrieveScrollCount(driver), 8,
         'keydown in input should not trigger a scroll');
-      chai.assert.equal(await retrieveScrollTop(driver), 1413,
+      chai.assert.equal(await retrieveScrollTop(driver), 1493,
         'keydown in input should not change scroll position');
 
       //Check that input received its value
