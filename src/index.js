@@ -13,6 +13,16 @@ import {
 } from './bounds.js';
 
 
+/**
+ * @param {string} url
+ * @param {boolean} openInBackground
+ * @see https://wiki.greasespot.net/GM.openInTab
+ */
+export function openInTab (url, openInBackground) {
+  //window.open(url, '_blank');
+  GM.openInTab(url, openInBackground);
+}
+
 export function dtfNavigationKeys () {
   'use strict';
 
@@ -123,7 +133,7 @@ export function dtfNavigationKeys () {
 
       let url = targetElement.querySelector('a.content-feed__link').href;
 
-      GM.openInTab(url, true);
+      openInTab(url, true);
     }
     else if (['z','c'].includes(key) && !modifier) {
       //console.log(event);
