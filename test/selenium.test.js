@@ -37,7 +37,7 @@ describe('selenium', function () {
       .build();
 
     //Load the website
-    await driver.get(path.resolve('./test/DTF-SingleFile.html'));
+    await driver.get(`file://${path.resolve('./test/DTF-SingleFile.html')}`);
     //await driver.get('http://dtf.ru/');
 
     //Subscribe to `scroll` events
