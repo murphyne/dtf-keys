@@ -1,10 +1,10 @@
 let bannerText = `
 // ==UserScript==
 // @name         DTF: Navigate with keys
-// @namespace    http://tampermonkey.net/
 // @version      0.4.3
 // @description  Navigate with keys!
 // @author       murphyne
+// @namespace    https://github.com/murphyne
 // @match        *://dtf.ru/*
 // @grant        GM.openInTab
 // ==/UserScript==
