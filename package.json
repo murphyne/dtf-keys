@@ -3,7 +3,7 @@
   "version": "0.5.0",
   "description": "Navigate with keys!",
   "author": "murphyne",
-  "license": "ISC",
+  "license": "MIT",
   "type": "module",
   "browser": "./src/main.js",
   "devDependencies": {

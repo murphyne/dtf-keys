@@ -5,6 +5,7 @@ let bannerText = `
 // @name         DTF: Navigate with keys
 // @version      0.5.0
 // @description  Navigate with keys!
+// @license      MIT
 // @author       murphyne
 // @namespace    https://github.com/murphyne
 // @match        *://dtf.ru/*
