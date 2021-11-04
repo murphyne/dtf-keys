@@ -2,7 +2,7 @@
   "name": "dtf-keys",
   "version": "0.4.3",
   "description": "Navigate with keys!",
-  "author": "mr-m",
+  "author": "murphyne",
   "license": "ISC",
   "type": "module",
   "browser": "./src/main.js",

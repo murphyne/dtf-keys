@@ -4,7 +4,7 @@ let bannerText = `
 // @namespace    http://tampermonkey.net/
 // @version      0.4.3
 // @description  Navigate with keys!
-// @author       mr-m
+// @author       murphyne
 // @match        *://dtf.ru/*
 // @grant        GM.openInTab
 // ==/UserScript==
