@@ -1,9 +1,10 @@
 import virtual from '@rollup/plugin-virtual';
+import pkg from './package.json';
 
 let bannerText = `
 // ==UserScript==
 // @name         DTF: Navigate with keys
-// @version      0.5.0
+// @version      ${pkg.version}
 // @description  Navigate with keys!
 // @license      MIT
 // @author       murphyne
