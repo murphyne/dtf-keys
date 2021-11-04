@@ -17,5 +17,13 @@
   "scripts": {
     "build": "rollup -c rollup.conf.js",
     "test": "mocha"
+  },
+  "homepage": "https://github.com/murphyne/dtf-keys",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/murphyne/dtf-keys.git"
+  },
+  "bugs": {
+    "url": "https://github.com/murphyne/dtf-keys/issues"
   }
 }
