@@ -52,3 +52,17 @@ jobs:
         asset_path: dist/dtf-keys.meta.js
         asset_name: dtf-keys.meta.js
         asset_content_type: application/javascript
+
+    - name: Upload userscript to artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        path: dist/dtf-keys.user.js
+        name: dtf-keys.user.js
+        retention-days: 5
+
+    - name: Upload metadata to artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        path: dist/dtf-keys.meta.js
+        name: dtf-keys.meta.js
+        retention-days: 5
