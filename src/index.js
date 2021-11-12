@@ -40,22 +40,22 @@ export function dtfNavigationKeys () {
   const selectorWidgetWrapper = '.widget_wrapper';
   const selectorFeedItem = '.feed__item';
 
-  function selectElements () {
-    let selectors = [
-      selectorVacancyHeader,
-      selectorCustomSubsite_html,
-      selectorSubsiteCover,
-      selectorSubsiteHead,
-      selectorNewsWidget,
-      selectorTeaserPodcast,
-      selectorDailyPromoUnit,
-      selectorBlogsEntries,
-      selectorVacanciesWidget,
-      selectorWidgetWrapper,
-      selectorFeedItem,
-    ].join(',');
+  const selectorComposite = [
+    selectorVacancyHeader,
+    selectorCustomSubsite_html,
+    selectorSubsiteCover,
+    selectorSubsiteHead,
+    selectorNewsWidget,
+    selectorTeaserPodcast,
+    selectorDailyPromoUnit,
+    selectorBlogsEntries,
+    selectorVacanciesWidget,
+    selectorWidgetWrapper,
+    selectorFeedItem,
+  ].join(',');
 
-    return Array.from(document.querySelectorAll(selectors));
+  function selectElements () {
+    return Array.from(document.querySelectorAll(selectorComposite));
   }
 
   function filterElements (elements) {
