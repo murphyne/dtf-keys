@@ -54,8 +54,8 @@ export function dtfNavigationKeys () {
     selectorFeedItem,
   ].join(',');
 
-  function selectElements () {
-    return Array.from(document.querySelectorAll(selectorComposite));
+  function selectElements (selector) {
+    return Array.from(document.querySelectorAll(selector));
   }
 
   function filterElements (elements) {
@@ -118,7 +118,7 @@ export function dtfNavigationKeys () {
       view.y = siteHeader.clientHeight;
       view.height = document.documentElement.clientHeight - view.y;
 
-      let elements = filterElements(selectElements());
+      let elements = filterElements(selectElements(selectorComposite));
       let i = indexOfCurrent(elements);
 
       let targetElement = {
@@ -138,7 +138,7 @@ export function dtfNavigationKeys () {
       view.y = siteHeader.clientHeight;
       view.height = document.documentElement.clientHeight - view.y;
 
-      let elements = filterElements(selectElements());
+      let elements = filterElements(selectElements(selectorComposite));
       let i = indexOfCurrent(elements);
 
       let targetElement = elements[i];
