@@ -28,19 +28,31 @@ export function dtfNavigationKeys () {
 
   let view = DOMRect.fromRect();
 
+  const selectorVacancyHeader = '.vacancy_header';
+  const selectorCustomSubsite_html = '.custom_subsite_html:first-of-type';
+  const selectorSubsiteCover = '.subsite__cover:first-of-type';
+  const selectorSubsiteHead = '.subsite_head:first-of-type';
+  const selectorNewsWidget = '.news_widget';
+  const selectorTeaserPodcast = '.teaserPodcast';
+  const selectorDailyPromoUnit = '.daily-promo-unit';
+  const selectorBlogsEntries = '.island.island--expanded.island--blogs_entries';
+  const selectorVacanciesWidget = '.vacancies_widget';
+  const selectorWidgetWrapper = '.widget_wrapper';
+  const selectorFeedItem = '.feed__item';
+
   function selectElements () {
     let selectors = [
-      '.vacancy_header',
-      '.custom_subsite_html:first-of-type',
-      '.subsite__cover:first-of-type',
-      '.subsite_head:first-of-type',
-      '.news_widget',
-      '.teaserPodcast',
-      '.daily-promo-unit',
-      '.island.island--expanded.island--blogs_entries',
-      '.vacancies_widget',
-      '.widget_wrapper',
-      '.feed__item',
+      selectorVacancyHeader,
+      selectorCustomSubsite_html,
+      selectorSubsiteCover,
+      selectorSubsiteHead,
+      selectorNewsWidget,
+      selectorTeaserPodcast,
+      selectorDailyPromoUnit,
+      selectorBlogsEntries,
+      selectorVacanciesWidget,
+      selectorWidgetWrapper,
+      selectorFeedItem,
     ].join(',');
 
     return Array.from(document.querySelectorAll(selectors));
@@ -59,7 +71,7 @@ export function dtfNavigationKeys () {
     let targetOffset = targetElementTop - view.top - topMargin;
 
     //Reveal both .feed_header and .new_entries
-    if (targetElement.isSameNode(document.querySelector('.feed__item'))) {
+    if (targetElement.isSameNode(document.querySelector(selectorFeedItem))) {
       let feedHeader = document.querySelector('.feed_header');
       if (feedHeader) {
         let feedHeaderHeight = feedHeader.getBoundingClientRect().height;
@@ -100,7 +112,7 @@ export function dtfNavigationKeys () {
     let modifier = alt || ctrl || meta || shift;
 
     if (['a','d','x'].includes(key) && !modifier && !keyHeld) {
-      if (document.querySelectorAll('.feed__item').length === 0) return;
+      if (document.querySelectorAll(selectorFeedItem).length === 0) return;
 
       let siteHeader = document.getElementsByClassName('site-header')[0];
       view.y = siteHeader.clientHeight;
@@ -120,7 +132,7 @@ export function dtfNavigationKeys () {
       window.scrollBy({ left: 0, top: targetOffset, behavior: 'smooth' });
     }
     else if (['e'].includes(key) && !modifier) {
-      if (document.querySelectorAll('.feed__item').length === 0) return;
+      if (document.querySelectorAll(selectorFeedItem).length === 0) return;
 
       let siteHeader = document.getElementsByClassName('site-header')[0];
       view.y = siteHeader.clientHeight;
