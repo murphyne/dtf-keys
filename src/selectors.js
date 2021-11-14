@@ -24,7 +24,7 @@ const selectorDailyPromoUnit = '.daily-promo-unit';
 const selectorBlogsEntries = '.island.island--expanded.island--blogs_entries';
 const selectorVacanciesWidget = '.vacancies_widget';
 const selectorWidgetWrapper = '.widget_wrapper';
-const selectorFeedItem = '.feed__item';
+const selectorFeedItem = '.content-feed';
 
 const selectorComposite = [
   selectorVacancyHeader,

@@ -6,6 +6,11 @@ import rollup from 'rollup';
 import webdriver from 'selenium-webdriver';
 
 import {
+  selectorComposite,
+  selectElements,
+} from "../src/selectors.js";
+
+import {
   injectScrollCount,
   retrieveScrollTop,
   retrieveScrollCount,
@@ -71,6 +76,17 @@ describe('selenium', function () {
 
     //Execute the userscript in the browser environment
     await driver.executeScript(code);
+  });
+
+  it('userscript finds correct number of elements', async function () {
+    //Set timeout for current mocha test
+    this.timeout(1000);
+
+    //Find elements on the page
+    let selectedElements = await driver.executeScript(selectElements, selectorComposite);
+
+    //Check found elements
+    chai.expect(selectedElements).to.have.lengthOf(12);
   });
 
   it('userscript handles `d` keydown', async function () {
