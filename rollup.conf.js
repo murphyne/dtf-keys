@@ -3,7 +3,7 @@ import virtual from '@rollup/plugin-virtual';
 let bannerText = `
 // ==UserScript==
 // @name         DTF: Navigate with keys
-// @version      0.4.3
+// @version      0.5.0
 // @description  Navigate with keys!
 // @author       murphyne
 // @namespace    https://github.com/murphyne
