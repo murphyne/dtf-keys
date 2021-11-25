@@ -30,6 +30,10 @@ const selectorComposite = [
   selectorFeedItem,
 ].join(',');
 
+/**
+ * @param {string} selector
+ * @returns {Element[]}
+ */
 function selectElements (selector) {
   return Array.from(document.querySelectorAll(selector));
 }

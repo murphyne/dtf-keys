@@ -38,6 +38,10 @@ export function dtfNavigationKeys () {
 
   let view = DOMRect.fromRect();
 
+  /**
+   * @param {Element[]} elements
+   * @returns {Element[]}
+   */
   function filterElements (elements) {
     return elements.filter(function (element, i, arr) {
       let bounds = element.getBoundingClientRect();
@@ -45,6 +49,10 @@ export function dtfNavigationKeys () {
     });
   }
 
+  /**
+   * @param {Element} targetElement
+   * @returns {number}
+   */
   function computeOffset (targetElement) {
     let targetElementTop = targetElement.getBoundingClientRect().top;
     let topMargin = 15;
@@ -68,6 +76,10 @@ export function dtfNavigationKeys () {
     return targetOffset;
   }
 
+  /**
+   * @param {Element[]} elements
+   * @returns {number}
+   */
   function indexOfCurrent (elements) {
     for (var i = 0; i < elements.length; i++) {
       let element = elements[i];
