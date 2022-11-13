@@ -7,7 +7,7 @@ export {
   selectElements,
 };
 
-const selectorNewsWidget = '.news_widget'; // Блок новостей за день
+const selectorNewsWidget = '.news-widget,.news-widget-skeleton'; // Блок новостей за день
 const selectorVacanciesWidget = '.vacancies_widget'; // Блок «Вакансии»
 const selectorWidgetWrapper = '.widget_wrapper'; // Блок «Лучшие комментарии»
 const selectorFeedItem = '.content-feed'; // Посты
