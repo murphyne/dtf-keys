@@ -8,11 +8,11 @@
   "browser": "./src/main.js",
   "devDependencies": {
     "@rollup/plugin-virtual": "^2.0.3",
-    "chai": "^4.2.0",
+    "chai": "^4.3.7",
     "fast-check": "^1.23.0",
-    "mocha": "^7.1.0",
+    "mocha": "^9.2.2",
     "rollup": "^1.21.1",
-    "selenium-webdriver": "^4.0.0-alpha.7",
+    "selenium-webdriver": "^4.6.0",
     "sinon": "^8.1.1"
   },
   "scripts": {
