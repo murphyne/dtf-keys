@@ -119,7 +119,7 @@ export function dtfNavigationKeys () {
 
       let targetElement = elements[i];
 
-      let url = targetElement.querySelector('a.content-feed__link').href;
+      let url = targetElement.querySelector('a.content-link').href;
 
       openInTab(url, true);
     }
