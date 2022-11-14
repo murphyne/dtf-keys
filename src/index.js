@@ -74,6 +74,7 @@ export function dtfNavigationKeys () {
     }
   }
 
+  //Как отслеживать и обрабатывать сочетания и последовательность нажатых клавиш
   //https://bureau.ru/soviet/20190815/
   document.addEventListener('keydown', function (event) {
     //console.log("%O %O", event.target, event);
