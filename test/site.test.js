@@ -59,14 +59,8 @@ describe('site', function () {
   it(`page 'dtf.ru/' loads`, testPageStatus('https://dtf.ru/'));
   it(`page 'dtf.ru/games' loads`, testPageStatus('https://dtf.ru/games'));
 
-  function testPageSelectors (page, selector, assert) {
+  function testPageSelectors (selector, assert) {
     return async function () {
-      //Set timeout for current mocha test
-      this.timeout(10000);
-
-      //Load the website
-      await driver.get(page);
-
       //Find elements on the page
       let selectedElements = await driver.executeScript(selectElements, selector);
 
@@ -75,41 +69,51 @@ describe('site', function () {
     }
   }
 
-  it(`selector '${selectorFeedItem}' gets correct number of elements`,
-    testPageSelectors('https://dtf.ru', selectorFeedItem,
-      (elements) => chai.expect(elements).to.have.length.above(3)));
-
-  it(`selector '${selectorNewsWidget}' gets correct number of elements`,
-    testPageSelectors('https://dtf.ru', selectorNewsWidget,
-      (elements) => chai.expect(elements).to.have.lengthOf(1)));
-
-  it(`selector '${selectorVacanciesWidget}' gets correct number of elements`,
-    testPageSelectors('https://dtf.ru', selectorVacanciesWidget,
-      (elements) => chai.expect(elements).to.have.lengthOf(1)));
-
-  it(`selector '${selectorWidgetWrapper}' gets correct number of elements`,
-    async function () {
-      //Set timeout for current mocha test
+  describe('selectors', function () {
+    before(async function () {
+      //Set timeout for current setUp mocha hook
       this.timeout(10000);
 
       //Load the website
       await driver.get('https://dtf.ru');
 
-      let selectedElements;
+      let heightBefore;
 
       //Trigger chunk loading
-      await driver.executeScript(() =>
-        document.querySelector(".feed__horizon").scrollIntoView());
+      heightBefore = await driver.executeScript(() => document.body.scrollHeight);
+      await driver.executeScript(() => window.scrollTo(0, document.body.scrollHeight));
 
       //Wait for chunk to load
-      let locator = webdriver.By.css('.feed__chunk:nth-of-type(2)');
-      await driver.wait(webdriver.until.elementLocated(locator));
+      await driver.wait(async function () {
+        return heightBefore !== await driver.executeScript(() => document.body.scrollHeight);
+      }, 2000);
 
-      //Find elements on the page
-      selectedElements = await driver.executeScript(selectElements, selectorWidgetWrapper);
+      //Trigger chunk loading
+      heightBefore = await driver.executeScript(() => document.body.scrollHeight);
+      await driver.executeScript(() => window.scrollTo(0, document.body.scrollHeight));
 
-      //Check found elements
-      chai.expect(selectedElements).to.have.lengthOf(1);
+      //Wait for chunk to load
+      await driver.wait(async function () {
+        return heightBefore !== await driver.executeScript(() => document.body.scrollHeight);
+      }, 2000);
+
+      await driver.executeScript(() => window.scrollTo(0, 0));
     });
 
+    it(`selector '${selectorFeedItem}' gets correct number of elements`,
+      testPageSelectors(selectorFeedItem,
+        (elements) => chai.expect(elements).to.have.length.above(3)));
+
+    it(`selector '${selectorNewsWidget}' gets correct number of elements`,
+      testPageSelectors(selectorNewsWidget,
+        (elements) => chai.expect(elements).to.have.lengthOf(1)));
+
+    it(`selector '${selectorVacanciesWidget}' gets correct number of elements`,
+      testPageSelectors(selectorVacanciesWidget,
+        (elements) => chai.expect(elements).to.have.lengthOf(1)));
+
+    it(`selector '${selectorWidgetWrapper}' gets correct number of elements`,
+      testPageSelectors(selectorWidgetWrapper,
+        (elements) => chai.expect(elements).to.have.lengthOf(1)));
+  });
 });
