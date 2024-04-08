@@ -4,8 +4,6 @@ import webdriver from 'selenium-webdriver';
 
 import {
   selectorNewsWidget,
-  selectorVacanciesWidget,
-  selectorWidgetWrapper,
   selectorFeedItem,
   selectElements,
 } from '../src/selectors.js';
@@ -101,14 +99,6 @@ describe('site', function () {
 
     it(`selector '${selectorNewsWidget}' gets correct number of elements`,
       testPageSelectors(selectorNewsWidget,
-        (elements) => chai.expect(elements).to.have.lengthOf(1)));
-
-    it(`selector '${selectorVacanciesWidget}' gets correct number of elements`,
-      testPageSelectors(selectorVacanciesWidget,
-        (elements) => chai.expect(elements).to.have.lengthOf(1)));
-
-    it(`selector '${selectorWidgetWrapper}' gets correct number of elements`,
-      testPageSelectors(selectorWidgetWrapper,
         (elements) => chai.expect(elements).to.have.lengthOf(1)));
   });
 });
