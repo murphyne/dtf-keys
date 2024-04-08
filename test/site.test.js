@@ -69,6 +69,21 @@ describe('site', function () {
     }
   }
 
+  async function loadPages (driver, count) {
+    for (let i = 0; i < count; i++) {
+      //Trigger chunk loading
+      const heightBefore = await driver.executeScript(() => document.body.scrollHeight);
+      await driver.executeScript(() => window.scrollTo(0, document.body.scrollHeight));
+
+      //Wait for chunk to load
+      await driver.wait(async function () {
+        return heightBefore !== await driver.executeScript(() => document.body.scrollHeight);
+      }, 2000);
+    }
+
+    await driver.executeScript(() => window.scrollTo(0, 0));
+  }
+
   describe('selectors', function () {
     before(async function () {
       //Set timeout for current setUp mocha hook
@@ -77,27 +92,7 @@ describe('site', function () {
       //Load the website
       await driver.get('https://dtf.ru');
 
-      let heightBefore;
-
-      //Trigger chunk loading
-      heightBefore = await driver.executeScript(() => document.body.scrollHeight);
-      await driver.executeScript(() => window.scrollTo(0, document.body.scrollHeight));
-
-      //Wait for chunk to load
-      await driver.wait(async function () {
-        return heightBefore !== await driver.executeScript(() => document.body.scrollHeight);
-      }, 2000);
-
-      //Trigger chunk loading
-      heightBefore = await driver.executeScript(() => document.body.scrollHeight);
-      await driver.executeScript(() => window.scrollTo(0, document.body.scrollHeight));
-
-      //Wait for chunk to load
-      await driver.wait(async function () {
-        return heightBefore !== await driver.executeScript(() => document.body.scrollHeight);
-      }, 2000);
-
-      await driver.executeScript(() => window.scrollTo(0, 0));
+      await loadPages(driver, 2);
     });
 
     it(`selector '${selectorFeedItem}' gets correct number of elements`,
