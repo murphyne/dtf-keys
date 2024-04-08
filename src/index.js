@@ -93,7 +93,7 @@ export function dtfNavigationKeys () {
     let modifier = alt || ctrl || meta || shift;
 
     if (['a','d','x'].includes(key) && !modifier && !keyHeld) {
-      if (document.querySelectorAll(selectorFeedItem).length === 0) return;
+      if (selectElements(selectorFeedItem).length === 0) return;
 
       let siteHeader = document.querySelector(selectorSiteHeader);
       view.y = siteHeader.clientHeight;
@@ -113,7 +113,7 @@ export function dtfNavigationKeys () {
       window.scrollBy({ left: 0, top: targetOffset, behavior: 'smooth' });
     }
     else if (['e'].includes(key) && !modifier) {
-      if (document.querySelectorAll(selectorFeedItem).length === 0) return;
+      if (selectElements(selectorFeedItem).length === 0) return;
 
       let siteHeader = document.querySelector(selectorSiteHeader);
       view.y = siteHeader.clientHeight;
