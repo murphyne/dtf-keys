@@ -13,6 +13,10 @@ import {
 } from './bounds.js';
 
 import {
+  selectorFeedHeader,
+  selectorNewEntries,
+  selectorSiteHeader,
+  selectorContentLink,
   selectorFeedItem,
   selectorComposite,
   selectElements,
@@ -46,15 +50,15 @@ export function dtfNavigationKeys () {
     let topMargin = 15;
     let targetOffset = targetElementTop - view.top - topMargin;
 
-    //Reveal both .feed_header and .new_entries
+    //Reveal both FeedHeader and NewEntries
     if (targetElement.isSameNode(document.querySelector(selectorFeedItem))) {
-      let feedHeader = document.querySelector('.feed_header');
+      let feedHeader = document.querySelector(selectorFeedHeader);
       if (feedHeader) {
         let feedHeaderHeight = feedHeader.getBoundingClientRect().height;
         targetOffset = targetOffset - feedHeaderHeight;
       }
 
-      let newEntries = document.querySelector('.new_entries');
+      let newEntries = document.querySelector(selectorNewEntries);
       if (newEntries) {
         let newEntriesHeight = newEntries.getBoundingClientRect().height;
         targetOffset = targetOffset - newEntriesHeight;
@@ -91,7 +95,7 @@ export function dtfNavigationKeys () {
     if (['a','d','x'].includes(key) && !modifier && !keyHeld) {
       if (document.querySelectorAll(selectorFeedItem).length === 0) return;
 
-      let siteHeader = document.getElementsByClassName('site-header')[0];
+      let siteHeader = document.querySelector(selectorSiteHeader);
       view.y = siteHeader.clientHeight;
       view.height = document.documentElement.clientHeight - view.y;
 
@@ -111,7 +115,7 @@ export function dtfNavigationKeys () {
     else if (['e'].includes(key) && !modifier) {
       if (document.querySelectorAll(selectorFeedItem).length === 0) return;
 
-      let siteHeader = document.getElementsByClassName('site-header')[0];
+      let siteHeader = document.querySelector(selectorSiteHeader);
       view.y = siteHeader.clientHeight;
       view.height = document.documentElement.clientHeight - view.y;
 
@@ -120,7 +124,7 @@ export function dtfNavigationKeys () {
 
       let targetElement = elements[i];
 
-      let url = targetElement.querySelector('a.content-link').href;
+      let url = targetElement.querySelector(selectorContentLink).href;
 
       openInTab(url, true);
     }

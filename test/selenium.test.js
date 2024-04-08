@@ -6,6 +6,7 @@ import rollup from 'rollup';
 import webdriver from 'selenium-webdriver';
 
 import {
+  selectorTextInput,
   selectorComposite,
   selectElements,
 } from "../src/selectors.js";
@@ -271,7 +272,7 @@ describe('selenium', function () {
     chai.assert.closeTo(await retrieveScrollTop(driver), 1939 - 200, 1);
 
     //Find the search input
-    const locator = webdriver.By.className('v-text-input__input');
+    const locator = webdriver.By.css(selectorTextInput);
     const element = driver.findElement(locator);
 
     //Press the `d` button
