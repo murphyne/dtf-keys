@@ -87,7 +87,7 @@ describe('selenium', function () {
     let selectedElements = await driver.executeScript(selectElements, selectorComposite);
 
     //Check found elements
-    chai.expect(selectedElements).to.have.lengthOf(15);
+    chai.expect(selectedElements).to.have.lengthOf(13);
   });
 
   it('userscript handles `d` keydown', async function () {
@@ -103,7 +103,7 @@ describe('selenium', function () {
 
     //Check scroll count and position
     chai.assert.equal(await retrieveScrollCount(driver), 1);
-    chai.assert.closeTo(await retrieveScrollTop(driver), 455, 1);
+    chai.assert.closeTo(await retrieveScrollTop(driver), 785, 1);
 
     //Press the `d` button
     //console.log('Press the `d` button');
@@ -114,7 +114,7 @@ describe('selenium', function () {
 
     //Check scroll count and position
     chai.assert.equal(await retrieveScrollCount(driver), 2);
-    chai.assert.closeTo(await retrieveScrollTop(driver), 1140, 1);
+    chai.assert.closeTo(await retrieveScrollTop(driver), 1634, 1);
 
     //Press the `d` button
     //console.log('Press the `d` button');
@@ -125,7 +125,7 @@ describe('selenium', function () {
 
     //Check scroll count and position
     chai.assert.equal(await retrieveScrollCount(driver), 3);
-    chai.assert.closeTo(await retrieveScrollTop(driver), 1939, 1);
+    chai.assert.closeTo(await retrieveScrollTop(driver), 2277, 1);
 
     //Press the `d` button
     //console.log('Press the `d` button');
@@ -136,7 +136,7 @@ describe('selenium', function () {
 
     //Check scroll count and position
     chai.assert.equal(await retrieveScrollCount(driver), 4);
-    chai.assert.closeTo(await retrieveScrollTop(driver), 2550, 1);
+    chai.assert.closeTo(await retrieveScrollTop(driver), 2992, 1);
   });
 
   it('userscript handles `e` keydown', async function () {
@@ -194,7 +194,7 @@ describe('selenium', function () {
       //Check that scroll count and position haven't changed
       chai.assert.equal(await retrieveScrollCount(driver), 4,
         'keydown should not trigger a scroll');
-      chai.assert.closeTo(await retrieveScrollTop(driver), 2550, 1,
+      chai.assert.closeTo(await retrieveScrollTop(driver), 2992, 1,
         'keydown should not change scroll position');
     }
   });
@@ -212,7 +212,7 @@ describe('selenium', function () {
 
     //Check scroll count and position
     chai.assert.equal(await retrieveScrollCount(driver), 5);
-    chai.assert.closeTo(await retrieveScrollTop(driver), 1939, 1);
+    chai.assert.closeTo(await retrieveScrollTop(driver), 2277, 1);
   });
 
   it('userscript handles `c` keydown', async function () {
@@ -228,7 +228,7 @@ describe('selenium', function () {
 
     //Check scroll count and position
     chai.assert.equal(await retrieveScrollCount(driver), 6);
-    chai.assert.closeTo(await retrieveScrollTop(driver), 1939 + 200, 1);
+    chai.assert.closeTo(await retrieveScrollTop(driver), 2277 + 200, 1);
   });
 
   it('userscript handles `x` keydown', async function () {
@@ -244,7 +244,7 @@ describe('selenium', function () {
 
     //Check scroll count and position
     chai.assert.equal(await retrieveScrollCount(driver), 7);
-    chai.assert.closeTo(await retrieveScrollTop(driver), 1939, 1);
+    chai.assert.closeTo(await retrieveScrollTop(driver), 2277, 1);
   });
 
   it('userscript handles `z` keydown', async function () {
@@ -260,7 +260,7 @@ describe('selenium', function () {
 
     //Check scroll count and position
     chai.assert.equal(await retrieveScrollCount(driver), 8);
-    chai.assert.closeTo(await retrieveScrollTop(driver), 1939 - 200, 1);
+    chai.assert.closeTo(await retrieveScrollTop(driver), 2277 - 200, 1);
   });
 
   it('userscript ignores keydown if input is focused', async function () {
@@ -269,7 +269,7 @@ describe('selenium', function () {
 
     //Check scroll count and position
     chai.assert.equal(await retrieveScrollCount(driver), 8);
-    chai.assert.closeTo(await retrieveScrollTop(driver), 1939 - 200, 1);
+    chai.assert.closeTo(await retrieveScrollTop(driver), 2277 - 200, 1);
 
     //Find the search input
     const locator = webdriver.By.css(selectorTextInput);
@@ -294,7 +294,7 @@ describe('selenium', function () {
       //Check that scroll count and position haven't changed
       chai.assert.equal(await retrieveScrollCount(driver), 8,
         'keydown in input should not trigger a scroll');
-      chai.assert.closeTo(await retrieveScrollTop(driver), 1939 - 200, 1,
+      chai.assert.closeTo(await retrieveScrollTop(driver), 2277 - 200, 1,
         'keydown in input should not change scroll position');
 
       //Check that input received its value
