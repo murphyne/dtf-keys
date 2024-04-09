@@ -22,15 +22,15 @@ export {
  * or (at least partially) within a `view`
  * @example
  * true cases:
- *                                                    +----+  
- * + v.t -------+ + v.t -------+ + v.t -------+ + v.t ¦rect¦-+
- * ¦  ¦         ¦ ¦  ¦         ¦ ¦  ¦  +----+ ¦ ¦ r.b +----+ ¦
- * ¦  ¦         ¦ ¦  ¦         ¦ ¦  ¦  ¦rect¦ ¦ ¦            ¦
- * ¦  ¦         ¦ ¦  ¦  +----+ ¦ ¦ r.b +----+ ¦ ¦            ¦
- * +--¦---------+ +--¦--¦rect¦-+ +------------+ +------------+
- *    ¦  +----+     r.b +----+                                
- *    ¦  ¦rect¦                                               
- *   r.b +----+                                               
+ *                                                    +----+   *
+ * + v.t -------+ + v.t -------+ + v.t -------+ + v.t ¦rect¦-+ *
+ * ¦  ¦         ¦ ¦  ¦         ¦ ¦  ¦  +----+ ¦ ¦ r.b +----+ ¦ *
+ * ¦  ¦         ¦ ¦  ¦         ¦ ¦  ¦  ¦rect¦ ¦ ¦            ¦ *
+ * ¦  ¦         ¦ ¦  ¦  +----+ ¦ ¦ r.b +----+ ¦ ¦            ¦ *
+ * +--¦---------+ +--¦--¦rect¦-+ +------------+ +------------+ *
+ *    ¦  +----+     r.b +----+                                 *
+ *    ¦  ¦rect¦                                                *
+ *   r.b +----+                                                *
  * @param {DOMRectReadOnly} rect
  * @param {DOMRectReadOnly} view
  * @returns {boolean}
@@ -43,13 +43,13 @@ function isApproaching (rect, view) {
  * Checks that `rect` is at least partially visible in `view`
  * @example
  * true cases:
- *                                                 +------+ r.t  
- * + v.t -------------+ + v.t -------------+ + v.t ¦ rect ¦--¦--+
- * ¦  ¦               ¦ ¦  ¦  +------+ r.t ¦ ¦ r.b +------+  ¦  ¦
- * ¦  ¦               ¦ ¦  ¦  ¦ rect ¦  ¦  ¦ ¦               ¦  ¦
- * ¦  ¦  +------+ r.t ¦ ¦ r.b +------+  ¦  ¦ ¦               ¦  ¦
- * +--¦--¦ rect ¦ v.b + +------------- v.b + +------------- v.b +
- *   r.b +------+                                                
+ *                                                 +------+ r.t   *
+ * + v.t -------------+ + v.t -------------+ + v.t ¦ rect ¦--¦--+ *
+ * ¦  ¦               ¦ ¦  ¦  +------+ r.t ¦ ¦ r.b +------+  ¦  ¦ *
+ * ¦  ¦               ¦ ¦  ¦  ¦ rect ¦  ¦  ¦ ¦               ¦  ¦ *
+ * ¦  ¦  +------+ r.t ¦ ¦ r.b +------+  ¦  ¦ ¦               ¦  ¦ *
+ * +--¦--¦ rect ¦ v.b + +------------- v.b + +------------- v.b + *
+ *   r.b +------+                                                 *
  * @param {DOMRectReadOnly} rect
  * @param {DOMRectReadOnly} view
  * @returns {boolean}
@@ -62,13 +62,13 @@ function isPartInbound (rect, view) {
  * Checks that `rect` is fully visible in `view`
  * @example
  * true cases:
- * + v.t -------------+ + v.t -------------+ + v.t -------------+
- * ¦  ¦               ¦ ¦  ¦               ¦ ¦ r.t +------+     ¦
- * ¦  ¦               ¦ ¦ r.t +------+     ¦ ¦     ¦ rect ¦     ¦
- * ¦ r.t +------+     ¦ ¦     ¦ rect ¦     ¦ ¦     +------+ r.b ¦
- * ¦     ¦ rect ¦     ¦ ¦     +------+ r.b ¦ ¦               ¦  ¦
- * ¦     +------+ r.b ¦ ¦               ¦  ¦ ¦               ¦  ¦
- * +------------- v.b + +------------- v.b + +------------- v.b +
+ * + v.t -------------+ + v.t -------------+ + v.t -------------+ *
+ * ¦  ¦               ¦ ¦  ¦               ¦ ¦ r.t +------+     ¦ *
+ * ¦  ¦               ¦ ¦ r.t +------+     ¦ ¦     ¦ rect ¦     ¦ *
+ * ¦ r.t +------+     ¦ ¦     ¦ rect ¦     ¦ ¦     +------+ r.b ¦ *
+ * ¦     ¦ rect ¦     ¦ ¦     +------+ r.b ¦ ¦               ¦  ¦ *
+ * ¦     +------+ r.b ¦ ¦               ¦  ¦ ¦               ¦  ¦ *
+ * +------------- v.b + +------------- v.b + +------------- v.b + *
  * @param {DOMRectReadOnly} rect
  * @param {DOMRectReadOnly} view
  * @returns {boolean}
@@ -80,13 +80,13 @@ function isFullInbound (rect, view) {
 /**
  * Returns height of `rect` part that's above the upper edge of `view`
  * @example
- *                                     r.t +------+  
- *                    r.t +------+      ¦  ¦ rect ¦  
- *   r.t +------+      ¦  ¦ rect ¦      ¦  +------+  
- * + v.t ¦ rect ¦-+ + v.t +------+-+ + v.t ---------+
- * ¦     +------+ ¦ ¦              ¦ ¦              ¦
- * ¦              ¦ ¦              ¦ ¦              ¦
- * +--------------+ +--------------+ +--------------+
+ *                                     r.t +------+   *
+ *                    r.t +------+      ¦  ¦ rect ¦   *
+ *   r.t +------+      ¦  ¦ rect ¦      ¦  +------+   *
+ * + v.t ¦ rect ¦-+ + v.t +------+-+ + v.t ---------+ *
+ * ¦     +------+ ¦ ¦              ¦ ¦              ¦ *
+ * ¦              ¦ ¦              ¦ ¦              ¦ *
+ * +--------------+ +--------------+ +--------------+ *
  * @param {DOMRectReadOnly} rect
  * @param {DOMRectReadOnly} view
  * @returns {number}
@@ -98,13 +98,13 @@ function getHiddenTop (rect, view) {
 /**
  * Returns height of `rect` part that's below the lower edge of `view`
  * @example
- * +--------------+ +--------------+ +--------------+
- * ¦              ¦ ¦              ¦ ¦              ¦
- * ¦              ¦ ¦              ¦ ¦     +------+ ¦
- * + v.b ---------+ + v.b +------+-+ + v.b ¦ rect ¦-+
- *    ¦  +------+      ¦  ¦ rect ¦     r.b +------+  
- *    ¦  ¦ rect ¦     r.b +------+                   
- *   r.b +------+                                    
+ * +--------------+ +--------------+ +--------------+ *
+ * ¦              ¦ ¦              ¦ ¦              ¦ *
+ * ¦              ¦ ¦              ¦ ¦     +------+ ¦ *
+ * + v.b ---------+ + v.b +------+-+ + v.b ¦ rect ¦-+ *
+ *    ¦  +------+      ¦  ¦ rect ¦     r.b +------+   *
+ *    ¦  ¦ rect ¦     r.b +------+                    *
+ *   r.b +------+                                     *
  * @param {DOMRectReadOnly} rect
  * @param {DOMRectReadOnly} view
  * @returns {number}
@@ -117,13 +117,13 @@ function getHiddenBottom (rect, view) {
  * Returns height of `rect` part that's within a `view`
  * @example
  * true cases:
- *                    r.t +------+     r.t +------+  
- * +--------------+ + v.t ¦      ¦-+ + v.t ¦ rect ¦-+
- * ¦              ¦ ¦     ¦      ¦ ¦ ¦     +------+ ¦
- * ¦              ¦ ¦     ¦ rect ¦ ¦ ¦              ¦
- * ¦     +------+ ¦ ¦     ¦      ¦ ¦ ¦              ¦
- * + v.b ¦ rect ¦-+ + v.b ¦      ¦-+ +--------------+
- *   r.b +------+     r.b +------+                   
+ *                    r.t +------+     r.t +------+   *
+ * +--------------+ + v.t ¦      ¦-+ + v.t ¦ rect ¦-+ *
+ * ¦              ¦ ¦     ¦      ¦ ¦ ¦     +------+ ¦ *
+ * ¦              ¦ ¦     ¦ rect ¦ ¦ ¦              ¦ *
+ * ¦     +------+ ¦ ¦     ¦      ¦ ¦ ¦              ¦ *
+ * + v.b ¦ rect ¦-+ + v.b ¦      ¦-+ +--------------+ *
+ *   r.b +------+     r.b +------+                    *
  * @param {DOMRectReadOnly} rect
  * @param {DOMRectReadOnly} view
  * @returns {number}
