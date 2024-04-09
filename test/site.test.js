@@ -93,11 +93,11 @@ describe('site', function () {
       await loadPages(driver, 2);
     });
 
-    it(`selector '${selectorFeedItem}' gets correct number of elements`,
+    it(`selector 'selectorFeedItem' gets correct number of elements`,
       testPageSelectors(selectorFeedItem,
         (elements) => chai.expect(elements).to.have.length.above(3)));
 
-    it(`selector '${selectorNewsWidget}' gets correct number of elements`,
+    it(`selector 'selectorNewsWidget' gets correct number of elements`,
       testPageSelectors(selectorNewsWidget,
         (elements) => chai.expect(elements).to.have.lengthOf(1)));
   });
