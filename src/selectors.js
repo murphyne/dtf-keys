@@ -15,7 +15,7 @@ export {
 const selectorFeedHeader = '.feed_header';
 const selectorNewEntries = '.new_entries';
 const selectorSiteHeader = '.header';
-const selectorContentLink = 'a.content__link';
+const selectorContentLink = '.content:not(.content--embed) > * > a.content__link';
 const selectorTextInput = '.text-input';
 
 const selectorNewsWidget = '.news-widget,.news-widget-skeleton'; // Блок новостей за день
