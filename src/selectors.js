@@ -21,13 +21,15 @@ const selectorTextInput = '.text-input';
 const selectorNewsWidget = '.news-widget,.news-widget-skeleton'; // Блок новостей за день
 const selectorSubsiteHeader = '.subsite-header'; // Блок «Шапка подсайта»
 const selectorServicesHeader = '.discovery__header'; // Блок «Шапка поиска»
-const selectorFeedItem = '.content:not(.content--embed)'; // Посты
+const selectorFeedItem = '.content-list > .content:not(.content--embed)'; // Закрытые посты
+const selectorArticle = '.entry > .content'; // Открытый пост
 
 const selectorComposite = [
   selectorNewsWidget,
   selectorSubsiteHeader,
   selectorServicesHeader,
   selectorFeedItem,
+  selectorArticle,
 ].join(',');
 
 /**
