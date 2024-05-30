@@ -23,6 +23,7 @@ const selectorSubsiteHeader = '.subsite-header'; // Блок «Шапка под
 const selectorServicesHeader = '.discovery__header'; // Блок «Шапка поиска»
 const selectorFeedItem = '.content-list > .content:not(.content--embed)'; // Закрытые посты
 const selectorArticle = '.entry > .content'; // Открытый пост
+const selectorComments = '.comments'; // Комментарии под открытым постом
 
 const selectorComposite = [
   selectorNewsWidget,
@@ -30,6 +31,7 @@ const selectorComposite = [
   selectorServicesHeader,
   selectorFeedItem,
   selectorArticle,
+  selectorComments,
 ].join(',');
 
 /**
