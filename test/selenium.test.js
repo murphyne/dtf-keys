@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import chai from 'chai';
 import sinon from 'sinon';
-import rollup from 'rollup';
+import { rollup } from 'rollup';
 import webdriver from 'selenium-webdriver';
 
 import {
@@ -50,7 +50,7 @@ describe('selenium', function () {
     await injectScrollCount(driver);
 
     //Generate the code
-    let bundle = await rollup.rollup({ input: './src/main.js' });
+    let bundle = await rollup({ input: './src/main.js' });
     let output = await bundle.generate({ format: 'esm' });
     code = output.output[0].code;
   });
