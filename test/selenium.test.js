@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import chai from 'chai';
+import * as chai from 'chai';
 import sinon from 'sinon';
 import { rollup } from 'rollup';
 import webdriver from 'selenium-webdriver';
