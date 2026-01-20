@@ -9,7 +9,7 @@
   "devDependencies": {
     "@rollup/plugin-virtual": "^3.0.2",
     "chai": "^6.2.2",
-    "fast-check": "^1.26.0",
+    "fast-check": "^4.5.3",
     "mocha": "^11.7.5",
     "rollup": "^4.55.2",
     "selenium-webdriver": "^4.40.0",
