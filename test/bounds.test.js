@@ -42,7 +42,10 @@ describe('rect', function () {
   it(`uses provided x, y, w, h as is`, function () {
     fc.assert(
       fc.property(
-        fc.double(), fc.double(), fc.double(), fc.double(),
+        fc.double({ noNaN: true }),
+        fc.double({ noNaN: true }),
+        fc.double({ noNaN: true }),
+        fc.double({ noNaN: true }),
         (x, y, w, h) => {
           const rect = r({x, y, w, h});
           chai.assert.equal(rect.x, x);
@@ -57,10 +60,10 @@ describe('rect', function () {
   it(`handles positive width, height values`, function () {
     fc.assert(
       fc.property(
-        fc.double(Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER),
-        fc.double(Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER),
-        fc.double(0, Number.MAX_SAFE_INTEGER),
-        fc.double(0, Number.MAX_SAFE_INTEGER),
+        fc.double({ noNaN: true, min: Number.MIN_SAFE_INTEGER, max: Number.MAX_SAFE_INTEGER }),
+        fc.double({ noNaN: true, min: Number.MIN_SAFE_INTEGER, max: Number.MAX_SAFE_INTEGER }),
+        fc.double({ noNaN: true, min: 0, max: Number.MAX_SAFE_INTEGER }),
+        fc.double({ noNaN: true, min: 0, max: Number.MAX_SAFE_INTEGER }),
         (x, y, w, h) => {
           const rect = r({x, y, w, h});
           chai.assert.equal(rect.top, y);
@@ -75,10 +78,10 @@ describe('rect', function () {
   it(`handles negative width, height values`, function () {
     fc.assert(
       fc.property(
-        fc.double(Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER),
-        fc.double(Number.MIN_SAFE_INTEGER, Number.MAX_SAFE_INTEGER),
-        fc.double(Number.MIN_SAFE_INTEGER, 0),
-        fc.double(Number.MIN_SAFE_INTEGER, 0),
+        fc.double({ noNaN: true, min: Number.MIN_SAFE_INTEGER, max: Number.MAX_SAFE_INTEGER}),
+        fc.double({ noNaN: true, min: Number.MIN_SAFE_INTEGER, max: Number.MAX_SAFE_INTEGER}),
+        fc.double({ noNaN: true, min: Number.MIN_SAFE_INTEGER, max: 0}),
+        fc.double({ noNaN: true, min: Number.MIN_SAFE_INTEGER, max: 0}),
         (x, y, w, h) => {
           const rect = r({x, y, w, h});
           chai.assert.equal(rect.top, y + h);
