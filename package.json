@@ -13,7 +13,7 @@
     "mocha": "^11.7.5",
     "rollup": "^4.59.0",
     "selenium-webdriver": "^4.41.0",
-    "sinon": "^21.0.1"
+    "sinon": "^21.0.3"
   },
   "scripts": {
     "build": "rollup -c rollup.conf.js",
