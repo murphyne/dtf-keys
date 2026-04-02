@@ -1,5 +1,6 @@
 import * as chai from 'chai';
 import sinon from 'sinon';
+import { describe, it, beforeEach, afterEach } from 'node:test';
 
 describe('main.js', function () {
   beforeEach(function () {

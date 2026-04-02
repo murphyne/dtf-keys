@@ -1,5 +1,6 @@
 import * as chai from 'chai';
 import fc from 'fast-check';
+import { describe, it } from 'node:test';
 
 import {
   isApproaching,

@@ -10,14 +10,13 @@
     "@rollup/plugin-virtual": "^3.0.2",
     "chai": "^6.2.2",
     "fast-check": "^4.9.0",
-    "mocha": "^11.7.6",
     "rollup": "^4.62.3",
     "selenium-webdriver": "^4.47.0",
     "sinon": "^22.1.0"
   },
   "scripts": {
     "build": "rollup -c rollup.conf.js",
-    "test": "mocha"
+    "test": "node --test"
   },
   "homepage": "https://github.com/murphyne/dtf-keys",
   "repository": {

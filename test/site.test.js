@@ -1,5 +1,6 @@
 import * as chai from 'chai';
 import https from 'https';
+import { describe, it, before, after } from 'node:test';
 import webdriver from 'selenium-webdriver';
 
 import {
@@ -16,9 +17,6 @@ describe('site', function () {
   let driver;
 
   before(async function () {
-    //Set timeout for current setUp mocha hook
-    this.timeout(30000);
-
     driver = new webdriver.Builder()
       .forBrowser('chrome')
       .setChromeOptions({
@@ -26,12 +24,9 @@ describe('site', function () {
       })
       .setFirefoxOptions(/* ... */)
       .build();
-  });
+  }, { timeout: 30000 });
 
   after(async function () {
-    //Set timeout for current tearDown mocha hook
-    this.timeout(5000);
-
     //Take a pause before exiting
     await driver.sleep(3000);
 
@@ -42,10 +37,10 @@ describe('site', function () {
       }));
 
     await driver.quit();
-  });
+  }, { timeout: 5000 });
 
   function testPageStatus (page) {
-    return function (done) {
+    return function (t, done) {
       https.get(page, function (res) {
         chai.assert.equal(res.statusCode, 200);
         chai.assert.notEqual(res.statusCode, 404);
@@ -84,14 +79,11 @@ describe('site', function () {
 
   describe('selectors', function () {
     before(async function () {
-      //Set timeout for current setUp mocha hook
-      this.timeout(10000);
-
       //Load the website
       await driver.get('https://dtf.ru');
 
       await loadPages(driver, 2);
-    });
+    }, { timeout: 10000 });
 
     it(`selector 'selectorFeedItem' gets correct number of elements`,
       testPageSelectors(selectorFeedItem,

@@ -3,6 +3,7 @@ import path from 'path';
 import * as chai from 'chai';
 import sinon from 'sinon';
 import { rollup } from 'rollup';
+import { describe, it, before, after } from 'node:test';
 import webdriver from 'selenium-webdriver';
 
 import {
@@ -31,9 +32,6 @@ describe('selenium', function () {
   let code;
 
   before(async function () {
-    //Set timeout for current setUp mocha hook
-    this.timeout(30000);
-
     driver = new webdriver.Builder()
       .forBrowser('chrome')
       .setChromeOptions({
@@ -53,12 +51,9 @@ describe('selenium', function () {
     let bundle = await rollup({ input: './src/main.js' });
     let output = await bundle.generate({ format: 'esm' });
     code = output.output[0].code;
-  });
+  }, { timeout: 30000 });
 
   after(async function () {
-    //Set timeout for current tearDown mocha hook
-    this.timeout(5000);
-
     //Take a pause before exiting
     await driver.sleep(3000);
 
@@ -69,20 +64,14 @@ describe('selenium', function () {
       }));
 
     await driver.quit();
-  });
+  }, { timeout: 5000 });
 
-  it('userscript executes without errors', async function () {
-    //Set timeout for current mocha test
-    this.timeout(1000);
-
+  it('userscript executes without errors', { timeout: 1000 }, async function () {
     //Execute the userscript in the browser environment
     await driver.executeScript(code);
   });
 
-  it('userscript finds correct number of elements', async function () {
-    //Set timeout for current mocha test
-    this.timeout(1000);
-
+  it('userscript finds correct number of elements', { timeout: 1000 }, async function () {
     //Find elements on the page
     let selectedElements = await driver.executeScript(selectElements, selectorComposite);
 
@@ -90,10 +79,7 @@ describe('selenium', function () {
     chai.expect(selectedElements).to.have.lengthOf(13);
   });
 
-  it('userscript handles `d` keydown', async function () {
-    //Set timeout for current mocha test
-    this.timeout(5000);
-
+  it('userscript handles `d` keydown', { timeout: 5000 }, async function () {
     //Press the `d` button
     //console.log('Press the `d` button');
     await driver.actions().keyDown('d').perform();
@@ -139,10 +125,7 @@ describe('selenium', function () {
     chai.assert.closeTo(await retrieveScrollTop(driver), 2992, 5);
   });
 
-  it('userscript handles `e` keydown', async function () {
-    //Set timeout for current mocha test
-    this.timeout(5000);
-
+  it('userscript handles `e` keydown', { timeout: 5000 }, async function () {
     //Inject sinon in the page
     const sinonPath = './node_modules/sinon/pkg/sinon.js';
     const sinonSrc = fs.readFileSync(sinonPath).toString();
@@ -171,10 +154,7 @@ describe('selenium', function () {
       'userscript should call TM API function with expected arguments');
   });
 
-  it('userscript stays in place if already at target', async function () {
-    //Set timeout for current mocha test
-    this.timeout(5000);
-
+  it('userscript stays in place if already at target', { timeout: 5000 }, async function () {
     //Press the `x` button
     //console.log('Press the `x` button');
     await driver.actions().keyDown('x').perform();
@@ -199,10 +179,7 @@ describe('selenium', function () {
     }
   });
 
-  it('userscript handles `a` keydown', async function () {
-    //Set timeout for current mocha test
-    this.timeout(5000);
-
+  it('userscript handles `a` keydown', { timeout: 5000 }, async function () {
     //Press the `a` button
     //console.log('Press the `a` button');
     await driver.actions().keyDown('a').perform();
@@ -215,10 +192,7 @@ describe('selenium', function () {
     chai.assert.closeTo(await retrieveScrollTop(driver), 2277, 5);
   });
 
-  it('userscript handles `c` keydown', async function () {
-    //Set timeout for current mocha test
-    this.timeout(5000);
-
+  it('userscript handles `c` keydown', { timeout: 5000 }, async function () {
     //Press the `c` button
     //console.log('Press the `c` button');
     await driver.actions().keyDown('c').perform();
@@ -231,10 +205,7 @@ describe('selenium', function () {
     chai.assert.closeTo(await retrieveScrollTop(driver), 2277 + 200, 5);
   });
 
-  it('userscript handles `x` keydown', async function () {
-    //Set timeout for current mocha test
-    this.timeout(5000);
-
+  it('userscript handles `x` keydown', { timeout: 5000 }, async function () {
     //Press the `x` button
     //console.log('Press the `x` button');
     await driver.actions().keyDown('x').perform();
@@ -247,10 +218,7 @@ describe('selenium', function () {
     chai.assert.closeTo(await retrieveScrollTop(driver), 2277, 5);
   });
 
-  it('userscript handles `z` keydown', async function () {
-    //Set timeout for current mocha test
-    this.timeout(5000);
-
+  it('userscript handles `z` keydown', { timeout: 5000 }, async function () {
     //Press the `z` button
     //console.log('Press the `z` button');
     await driver.actions().keyDown('z').perform();
@@ -263,10 +231,7 @@ describe('selenium', function () {
     chai.assert.closeTo(await retrieveScrollTop(driver), 2277 - 200, 5);
   });
 
-  it('userscript ignores keydown if input is focused', async function () {
-    //Set timeout for current mocha test
-    this.timeout(5000);
-
+  it('userscript ignores keydown if input is focused', { timeout: 5000 }, async function () {
     //Check scroll count and position
     chai.assert.equal(await retrieveScrollCount(driver), 8);
     chai.assert.closeTo(await retrieveScrollTop(driver), 2277 - 200, 5);
