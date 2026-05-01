@@ -11,7 +11,7 @@
     "chai": "^6.2.2",
     "fast-check": "^4.6.0",
     "mocha": "^11.7.5",
-    "rollup": "^4.60.1",
+    "rollup": "^4.60.2",
     "selenium-webdriver": "^4.41.0",
     "sinon": "^21.0.3"
   },
