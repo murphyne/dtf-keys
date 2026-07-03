@@ -12,7 +12,7 @@
     "fast-check": "^4.8.0",
     "mocha": "^11.7.6",
     "rollup": "^4.61.0",
-    "selenium-webdriver": "^4.44.0",
+    "selenium-webdriver": "^4.45.0",
     "sinon": "^22.0.0"
   },
   "scripts": {
