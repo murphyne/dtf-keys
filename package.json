@@ -10,7 +10,7 @@
     "@rollup/plugin-virtual": "^3.0.2",
     "chai": "^6.2.2",
     "fast-check": "^4.9.0",
-    "rollup": "^4.62.3",
+    "rollup": "^4.63.1",
     "selenium-webdriver": "^4.47.0",
     "sinon": "^22.1.0"
   },
