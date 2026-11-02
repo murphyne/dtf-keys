@@ -7,7 +7,7 @@
   "type": "module",
   "browser": "./src/main.js",
   "devDependencies": {
-    "@rollup/plugin-virtual": "^3.0.2",
+    "@rollup/plugin-virtual": "^3.0.3",
     "chai": "^6.3.0",
     "fast-check": "^4.10.2",
     "rollup": "^4.63.5",
